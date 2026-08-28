@@ -46,7 +46,7 @@ export const PERSONAL_INFO = {
   location: 'Coimbatore, Tamil Nadu, India',
   social: {
     github: 'https://github.com/Dharanesh6',
-    linkedin: 'https://linkedin.com/in/dharanesh-k',
+    linkedin: 'https://www.linkedin.com/in/dharanesh-k-b018a1357/',
     leetcode: 'https://leetcode.com/u/dharanesh-k',
     email: 'kdharanesh6@gmail.com',
   },
