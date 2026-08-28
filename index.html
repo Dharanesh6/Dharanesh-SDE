@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dharanesh | SDE</title>
+    <meta name="description" content="Personal developer portfolio of Dharanesh, B.Tech Information Technology student at Kumaraguru College of Technology (KCT). SDE + AI Engineer building intelligent software, IoT architectures, and computer vision systems." />
+    <meta name="keywords" content="Dharanesh, SDE, AI Engineer, Full-Stack Developer, IoT Engineer, Computer Vision, KCT, Kumaraguru College of Technology, Portfolio, Software Engineer" />
+    <meta name="author" content="Dharanesh" />
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Dharanesh | SDE" />
+    <meta property="og:description" content="Building software systems, exploring intelligent architectures, solving real-world physical and digital problems, and turning ideas into tangible products." />
+    <meta property="og:site_name" content="Dharanesh | SDE" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Dharanesh | SDE" />
+    <meta name="twitter:description" content="B.Tech IT @ Kumaraguru College of Technology. SDE + AI Engineer building software, IoT, and AI systems." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Theme Initialization Script -->
+    <script>
+      (function() {
+        try {
+          const storedTheme = localStorage.getItem('dk_theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (storedTheme === 'dark' || (!storedTheme && prefersDark) || !storedTheme) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+          } else {
+            document.documentElement.classList.add('light');
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <!-- Google MediaPipe Computer Vision, Hands & Face Mesh SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous" defer></script>
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
