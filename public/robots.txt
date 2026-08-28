@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dharanesh6.github.io/Dharanesh-SDE/sitemap.xml
