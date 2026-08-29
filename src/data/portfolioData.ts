@@ -13,6 +13,8 @@ import type {
 export const PERSONAL_INFO = {
   name: 'DHARANESH K',
   roleTitle: 'SDE + AI Engineer',
+  avatarUrl: '/profile.jpg',
+  avatarWebp: '/profile.webp',
   roles: [
     'Software Engineer',
     'AI Engineer',

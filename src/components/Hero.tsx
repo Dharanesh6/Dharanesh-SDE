@@ -4,9 +4,11 @@ import {
   Sparkles,
   Cpu,
   Layers,
+  ShieldCheck,
 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, LeetCodeIcon } from './Icons';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { resolveAssetUrl, resolveWebpUrl } from '../utils/assetUrl';
 
 interface HeroProps {
   onExploreProjects: () => void;
@@ -49,17 +51,51 @@ export function Hero({
     return () => clearTimeout(timer);
   }, [displayedText, isDeleting, roleIndex, typingSpeed]);
 
+  const avatarJpg = resolveAssetUrl(PERSONAL_INFO.avatarUrl || '/profile.jpg');
+  const avatarWebp = resolveWebpUrl(PERSONAL_INFO.avatarWebp || '/profile.webp');
+
   return (
     <section
       id="hero"
       className="relative min-h-[85vh] flex items-center justify-center pt-20 pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
       {/* Background Ambient Glow Orbs */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px] h-[300px] bg-gradient-to-tr from-brand-blue/20 via-brand-violet/20 to-brand-cyan/15 blur-[100px] rounded-full pointer-events-none -z-10" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[340px] bg-gradient-to-tr from-brand-blue/20 via-brand-violet/20 to-brand-cyan/15 blur-[110px] rounded-full pointer-events-none -z-10" />
 
       <div className="max-w-4xl mx-auto text-center relative z-10 flex flex-col items-center">
+        {/* ========================================================= */}
+        {/* PROFESSIONAL AVATAR PORTRAIT WITH CYBER GLOW */}
+        {/* ========================================================= */}
+        <div className="relative mb-6 group">
+          {/* Subtle Ambient Backlight Glow */}
+          <div className="absolute -inset-2 bg-gradient-to-r from-brand-blue via-brand-violet to-brand-cyan rounded-full blur-xl opacity-60 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none" />
+
+          {/* Cyber Ring Container */}
+          <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1 bg-gradient-to-tr from-brand-blue via-brand-violet to-brand-cyan shadow-xl shadow-brand-blue/25">
+            <div className="w-full h-full rounded-full overflow-hidden bg-dark-bg border-2 border-dark-card relative">
+              <picture>
+                {avatarWebp && <source srcSet={avatarWebp} type="image/webp" />}
+                <img
+                  src={avatarJpg}
+                  alt={PERSONAL_INFO.name}
+                  loading="eager"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                />
+              </picture>
+            </div>
+
+            {/* Verified Badge Icon */}
+            <div
+              title="Verified Engineer & Builder"
+              className="absolute -bottom-0.5 -right-0.5 w-7 h-7 rounded-full bg-dark-card border-2 border-brand-cyan flex items-center justify-center shadow-md shadow-brand-cyan/30 text-brand-cyan"
+            >
+              <ShieldCheck className="w-4 h-4" />
+            </div>
+          </div>
+        </div>
+
         {/* Status Pill */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-blue/30 bg-dark-surface/80 light:bg-white/90 backdrop-blur-md shadow-md mb-6">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-blue/30 bg-dark-surface/80 light:bg-white/90 backdrop-blur-md shadow-md mb-5">
           <div className="flex items-center gap-1.5 font-mono text-[10px] font-semibold text-brand-cyan tracking-wider uppercase">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-cyan opacity-75"></span>

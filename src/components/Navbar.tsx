@@ -16,6 +16,7 @@ import {
   Cpu,
 } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { resolveAssetUrl, resolveWebpUrl } from '../utils/assetUrl';
 
 interface NavbarProps {
   isDark: boolean;
@@ -84,12 +85,19 @@ export function Navbar({ isDark, onToggleTheme, activeSection }: NavbarProps) {
         {/* Brand Monogram */}
         <button
           onClick={() => scrollToSection('hero')}
-          className="group flex items-center gap-2 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-lg p-0.5 cursor-pointer"
+          className="group flex items-center gap-2.5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-lg p-0.5 cursor-pointer"
           aria-label="Go to top"
         >
-          <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-brand-blue via-brand-violet to-brand-cyan p-[1px] shadow-sm">
-            <div className="w-full h-full rounded-[7px] bg-dark-bg flex items-center justify-center font-mono font-bold text-xs tracking-wider text-white group-hover:bg-dark-surface transition-colors">
-              DK<span className="text-brand-cyan animate-pulse">_</span>
+          <div className="relative flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-brand-blue via-brand-violet to-brand-cyan p-[1.5px] shadow-sm">
+            <div className="w-full h-full rounded-full overflow-hidden bg-dark-bg relative">
+              <picture>
+                <source srcSet={resolveWebpUrl(PERSONAL_INFO.avatarWebp || '/profile.webp')} type="image/webp" />
+                <img
+                  src={resolveAssetUrl(PERSONAL_INFO.avatarUrl || '/profile.jpg')}
+                  alt={PERSONAL_INFO.name}
+                  className="w-full h-full object-cover object-center"
+                />
+              </picture>
             </div>
           </div>
           <div className="hidden sm:flex flex-col">

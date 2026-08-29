@@ -12,8 +12,12 @@ import {
   ArrowUpRight,
 } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { resolveAssetUrl, resolveWebpUrl } from '../utils/assetUrl';
 
 export function About() {
+  const avatarJpg = resolveAssetUrl(PERSONAL_INFO.avatarUrl || '/profile.jpg');
+  const avatarWebp = resolveWebpUrl(PERSONAL_INFO.avatarWebp || '/profile.webp');
+
   const corePillars = [
     {
       icon: Wrench,
@@ -81,9 +85,16 @@ export function About() {
               {/* Header inside Persona Card */}
               <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-white/10 light:border-slate-200 mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-blue via-brand-violet to-brand-cyan p-[1.5px] shadow-md shadow-brand-blue/20">
-                    <div className="w-full h-full rounded-[10px] bg-dark-bg flex items-center justify-center font-mono font-bold text-sm text-white">
-                      DK<span className="text-brand-cyan animate-pulse">_</span>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-brand-blue via-brand-violet to-brand-cyan p-[1.5px] shadow-md shadow-brand-blue/20 shrink-0">
+                    <div className="w-full h-full rounded-[10px] bg-dark-bg overflow-hidden relative">
+                      <picture>
+                        {avatarWebp && <source srcSet={avatarWebp} type="image/webp" />}
+                        <img
+                          src={avatarJpg}
+                          alt={PERSONAL_INFO.name}
+                          className="w-full h-full object-cover object-center"
+                        />
+                      </picture>
                     </div>
                   </div>
                   <div>
