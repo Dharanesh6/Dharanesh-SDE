@@ -68,11 +68,11 @@ export function Hero({
         {/* ========================================================= */}
         <div className="relative mb-6 group">
           {/* Subtle Ambient Backlight Glow */}
-          <div className="absolute -inset-2 bg-gradient-to-r from-brand-blue via-brand-violet to-brand-cyan rounded-full blur-xl opacity-60 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none" />
+          <div className="absolute -inset-3 bg-gradient-to-r from-brand-blue via-brand-violet to-brand-cyan rounded-full blur-2xl opacity-60 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none" />
 
-          {/* Cyber Ring Container */}
-          <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1 bg-gradient-to-tr from-brand-blue via-brand-violet to-brand-cyan shadow-xl shadow-brand-blue/25">
-            <div className="w-full h-full rounded-full overflow-hidden bg-dark-bg border-2 border-dark-card relative">
+          {/* Cyber Ring Container - Prominent Size */}
+          <div className="relative w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 rounded-full p-1.5 bg-gradient-to-tr from-brand-blue via-brand-violet to-brand-cyan shadow-2xl shadow-brand-blue/30 transition-transform duration-300 group-hover:scale-[1.02]">
+            <div className="w-full h-full rounded-full overflow-hidden bg-dark-bg border-[3px] border-dark-card relative">
               <picture>
                 {avatarWebp && <source srcSet={avatarWebp} type="image/webp" />}
                 <img
@@ -87,9 +87,9 @@ export function Hero({
             {/* Verified Badge Icon */}
             <div
               title="Verified Engineer & Builder"
-              className="absolute -bottom-0.5 -right-0.5 w-7 h-7 rounded-full bg-dark-card border-2 border-brand-cyan flex items-center justify-center shadow-md shadow-brand-cyan/30 text-brand-cyan"
+              className="absolute bottom-1 right-1 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-dark-card border-2 border-brand-cyan flex items-center justify-center shadow-lg shadow-brand-cyan/40 text-brand-cyan"
             >
-              <ShieldCheck className="w-4 h-4" />
+              <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
           </div>
         </div>

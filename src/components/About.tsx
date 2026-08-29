@@ -84,9 +84,9 @@ export function About() {
             <div>
               {/* Header inside Persona Card */}
               <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-white/10 light:border-slate-200 mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-brand-blue via-brand-violet to-brand-cyan p-[1.5px] shadow-md shadow-brand-blue/20 shrink-0">
-                    <div className="w-full h-full rounded-[10px] bg-dark-bg overflow-hidden relative">
+                <div className="flex items-center gap-3.5">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-brand-blue via-brand-violet to-brand-cyan p-[2px] shadow-lg shadow-brand-blue/25 shrink-0">
+                    <div className="w-full h-full rounded-[14px] bg-dark-bg overflow-hidden relative">
                       <picture>
                         {avatarWebp && <source srcSet={avatarWebp} type="image/webp" />}
                         <img
