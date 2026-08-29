@@ -136,14 +136,6 @@ export function Hero({
         {/* CTA Buttons */}
         <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
           <button
-            onClick={() => window.dispatchEvent(new CustomEvent('open-dharanesh-ai'))}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-brand-violet to-brand-blue border border-brand-cyan/40 hover:opacity-95 shadow-md shadow-brand-violet/25 transition-all cursor-pointer group"
-          >
-            <Sparkles className="w-4 h-4 text-brand-cyan animate-pulse" />
-            <span>Ask Dharanesh AI</span>
-          </button>
-
-          <button
             onClick={onExploreProjects}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-brand-blue via-brand-violet to-brand-cyan hover:opacity-95 shadow-md shadow-brand-blue/20 transition-all cursor-pointer"
           >

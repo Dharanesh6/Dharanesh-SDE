@@ -18,7 +18,6 @@ import { GitHubPresence } from './components/GitHubPresence';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { CertificateModal } from './components/CertificateModal';
-import { DharaneshAIChat } from './components/DharaneshAIChat';
 import type { CertificateModalData } from './types/portfolio';
 
 export function App() {
@@ -250,9 +249,6 @@ export function App() {
 
       {/* Footer */}
       <Footer />
-
-      {/* Floating Ask Dharanesh AI Assistant */}
-      <DharaneshAIChat onScrollToSection={scrollTo} />
 
       {/* Certificate High-Resolution Modal Viewer */}
       <CertificateModal
