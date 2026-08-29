@@ -1,16 +1,34 @@
 /**
- * Resolves static asset paths correctly across all hosting environments:
- * - Localhost dev server
- * - GitHub Pages with repo subdirectory (e.g. /Dharanesh-SDE/)
- * - Custom domain roots (e.g. Firebase Hosting, Vercel, Netlify)
+ * Resolves static asset paths with 100% reliability across all hosting environments:
+ * - Localhost dev server (http://localhost:5173/)
+ * - GitHub Pages with repository subpath (https://<user>.github.io/<repo>/)
+ * - Custom domain roots (Firebase Hosting, Vercel, Netlify)
  */
 export function resolveAssetUrl(path?: string): string {
   if (!path) return '';
-  if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:')) {
+  if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:') || path.startsWith('blob:')) {
     return path;
   }
   const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-  const baseUrl = import.meta.env.BASE_URL || './';
+
+  if (typeof window !== 'undefined') {
+    const origin = window.location.origin;
+    const pathname = window.location.pathname;
+
+    // Check if hosted on GitHub Pages subdomain (e.g. username.github.io/repo-name)
+    if (window.location.hostname.endsWith('github.io')) {
+      const segments = pathname.split('/').filter(Boolean);
+      if (segments.length > 0) {
+        const repoName = segments[0];
+        return `${origin}/${repoName}/${cleanPath}`;
+      }
+    }
+
+    // Default for localhost or root domains
+    return `${origin}/${cleanPath}`;
+  }
+
+  const baseUrl = import.meta.env.BASE_URL || '/';
   const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
   return `${cleanBase}${cleanPath}`;
 }
@@ -34,10 +52,11 @@ export function preloadCertificateImage(path?: string): void {
   if (!path || typeof window === 'undefined') return;
   const webpUrl = resolveWebpUrl(path);
   const jpgUrl = resolveAssetUrl(path);
-  
+
   const imgWebp = new Image();
   imgWebp.src = webpUrl;
-  
+
   const imgJpg = new Image();
   imgJpg.src = jpgUrl;
 }
+

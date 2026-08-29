@@ -145,13 +145,22 @@ export function CertificateModal({ certificate, onClose }: CertificateModalProps
     window.open(resolvedJpgUrl, '_blank', 'noopener,noreferrer');
   };
 
-  const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = resolvedJpgUrl;
-    link.download = currentImage.url.split('/').pop() || 'certificate.jpg';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleDownload = async () => {
+    try {
+      const response = await fetch(resolvedJpgUrl);
+      if (!response.ok) throw new Error('Download failed');
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = currentImage.url.split('/').pop() || 'certificate.jpg';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1000);
+    } catch {
+      window.open(resolvedJpgUrl, '_blank', 'noopener,noreferrer');
+    }
   };
 
   return (
