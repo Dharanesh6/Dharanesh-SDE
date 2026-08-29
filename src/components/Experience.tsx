@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { INTERNSHIP, WORKSHOPS, LEADERSHIP_ROLES } from '../data/portfolioData';
 import type { CertificateModalData, WorkshopItem, InternshipItem } from '../types/portfolio';
+import { preloadCertificateImage } from '../utils/assetUrl';
 
 interface ExperienceProps {
   onViewCertificate?: (cert: CertificateModalData) => void;
@@ -217,6 +218,7 @@ export function Experience({ onViewCertificate }: ExperienceProps) {
                     <button
                       type="button"
                       onClick={() => handleOpenInternshipCert(INTERNSHIP)}
+                      onMouseEnter={() => preloadCertificateImage(INTERNSHIP.certificateUrl)}
                       className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium bg-brand-violet/20 hover:bg-brand-violet/30 text-brand-violet-glow border border-brand-violet/50 transition-all shadow-sm shadow-brand-violet/20 cursor-pointer self-start sm:self-auto"
                     >
                       <Eye className="w-3.5 h-3.5" />
@@ -256,6 +258,7 @@ export function Experience({ onViewCertificate }: ExperienceProps) {
                   <div
                     key={workshop.id || workshop.title}
                     onClick={() => hasCert && handleOpenWorkshopCert(workshop)}
+                    onMouseEnter={() => hasCert && preloadCertificateImage(workshop.certificateUrl)}
                     className={`card-cyber p-5 flex flex-col justify-between border-white/10 hover:border-brand-cyan/40 group ${
                       hasCert ? 'cursor-pointer' : ''
                     }`}

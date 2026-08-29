@@ -11,8 +11,10 @@ import {
   Calendar,
   Sparkles,
   Layers,
+  RefreshCw,
 } from 'lucide-react';
 import type { CertificateModalData } from '../types/portfolio';
+import { resolveAssetUrl, resolveWebpUrl } from '../utils/assetUrl';
 
 interface CertificateModalProps {
   certificate: CertificateModalData | null;
@@ -23,11 +25,13 @@ export function CertificateModal({ certificate, onClose }: CertificateModalProps
   const [zoomLevel, setZoomLevel] = useState<number>(1);
   const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
   const [imageLoaded, setImageLoaded] = useState<boolean>(false);
+  const [hasError, setHasError] = useState<boolean>(false);
   const [isPanning, setIsPanning] = useState<boolean>(false);
   const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [dragStart, setDragStart] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
 
   // Compile image list (primary image + any additionalImages)
   const imageList = certificate
@@ -47,13 +51,26 @@ export function CertificateModal({ certificate, onClose }: CertificateModalProps
 
   const currentImage = imageList[activeImageIndex] || imageList[0];
 
+  const resolvedJpgUrl = currentImage ? resolveAssetUrl(currentImage.url) : '';
+  const resolvedWebpUrl = currentImage ? resolveWebpUrl(currentImage.url) : '';
+
   // Reset zoom, position, and active tab when certificate changes
   useEffect(() => {
     setZoomLevel(1);
     setPosition({ x: 0, y: 0 });
     setActiveImageIndex(0);
     setImageLoaded(false);
-  }, [certificate]);
+    setHasError(false);
+
+    // If image is already cached in browser memory, show immediately
+    if (resolvedJpgUrl) {
+      const preloadImg = new Image();
+      preloadImg.src = resolvedWebpUrl || resolvedJpgUrl;
+      if (preloadImg.complete) {
+        setImageLoaded(true);
+      }
+    }
+  }, [certificate, resolvedJpgUrl, resolvedWebpUrl]);
 
   // Keyboard shortcut support (Escape to close, +/- to zoom)
   useEffect(() => {
@@ -125,12 +142,12 @@ export function CertificateModal({ certificate, onClose }: CertificateModalProps
   };
 
   const handleOpenNewTab = () => {
-    window.open(currentImage.url, '_blank', 'noopener,noreferrer');
+    window.open(resolvedJpgUrl, '_blank', 'noopener,noreferrer');
   };
 
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = currentImage.url;
+    link.href = resolvedJpgUrl;
     link.download = currentImage.url.split('/').pop() || 'certificate.jpg';
     document.body.appendChild(link);
     link.click();
@@ -274,6 +291,7 @@ export function CertificateModal({ certificate, onClose }: CertificateModalProps
                   setZoomLevel(1);
                   setPosition({ x: 0, y: 0 });
                   setImageLoaded(false);
+                  setHasError(false);
                 }}
                 className={`px-3 py-1 rounded-lg text-xs font-mono whitespace-nowrap transition-all cursor-pointer ${
                   activeImageIndex === idx
@@ -306,27 +324,69 @@ export function CertificateModal({ certificate, onClose }: CertificateModalProps
           <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px] opacity-40 pointer-events-none" />
 
           {/* Loading Spinner */}
-          {!imageLoaded && (
+          {!imageLoaded && !hasError && (
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-slate-400 font-mono text-xs z-10">
               <div className="w-8 h-8 rounded-full border-2 border-brand-cyan/30 border-t-brand-cyan animate-spin" />
-              <span>Loading high-resolution certificate...</span>
+              <span>Loading certificate...</span>
             </div>
           )}
 
-          {/* Certificate Image */}
-          <img
-            src={currentImage.url}
-            alt={currentImage.title}
-            onLoad={() => setImageLoaded(true)}
+          {/* Error State Fallback */}
+          {hasError && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-slate-400 font-mono text-xs z-10 p-6 text-center">
+              <p className="text-amber-400 font-semibold">Unable to display preview directly.</p>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => {
+                    setHasError(false);
+                    setImageLoaded(false);
+                  }}
+                  className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 flex items-center gap-1.5 cursor-pointer"
+                >
+                  <RefreshCw className="w-3.5 h-3.5" /> Retry
+                </button>
+                <button
+                  onClick={handleOpenNewTab}
+                  className="px-3 py-1.5 rounded-lg bg-brand-blue/20 hover:bg-brand-blue/30 text-brand-cyan flex items-center gap-1.5 cursor-pointer"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" /> Open in New Tab
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Ultra-Fast Responsive Certificate Picture */}
+          <picture
             style={{
               transform: `translate(${position.x}px, ${position.y}px) scale(${zoomLevel})`,
               transition: isPanning ? 'none' : 'transform 0.2s cubic-bezier(0.2, 0, 0, 1)',
             }}
-            className={`max-w-full max-h-[64vh] object-contain rounded-lg shadow-2xl transition-opacity duration-300 ${
+            className={`max-w-full max-h-[64vh] flex items-center justify-center transition-opacity duration-200 ${
               imageLoaded ? 'opacity-100' : 'opacity-0'
             }`}
-            draggable={false}
-          />
+          >
+            {resolvedWebpUrl && (
+              <source srcSet={resolvedWebpUrl} type="image/webp" />
+            )}
+            <img
+              ref={imgRef}
+              src={resolvedJpgUrl}
+              alt={currentImage.title}
+              loading="eager"
+              decoding="async"
+              onLoad={() => setImageLoaded(true)}
+              onError={() => {
+                // If webp fails or path error occurs
+                if (!hasError) {
+                  setImageLoaded(true);
+                } else {
+                  setHasError(true);
+                }
+              }}
+              className="max-w-full max-h-[64vh] object-contain rounded-lg shadow-2xl"
+              draggable={false}
+            />
+          </picture>
 
           {/* Mobile Zoom Floating Bar */}
           <div className="sm:hidden absolute bottom-3 right-3 flex items-center gap-1 bg-dark-card/90 light:bg-white/90 backdrop-blur-md p-1 rounded-xl border border-white/10 shadow-lg">
@@ -392,3 +452,4 @@ export function CertificateModal({ certificate, onClose }: CertificateModalProps
 }
 
 export default CertificateModal;
+

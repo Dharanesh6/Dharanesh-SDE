@@ -12,6 +12,7 @@ import {
 import confetti from 'canvas-confetti';
 import { ACHIEVEMENTS } from '../data/portfolioData';
 import type { CertificateModalData } from '../types/portfolio';
+import { preloadCertificateImage } from '../utils/assetUrl';
 
 interface AchievementWallProps {
   onViewCertificate?: (cert: CertificateModalData) => void;
@@ -113,6 +114,7 @@ export function AchievementWall({ onViewCertificate }: AchievementWallProps) {
               <div
                 key={item.id}
                 onClick={() => hasCert && handleOpenCertificate(item)}
+                onMouseEnter={() => hasCert && preloadCertificateImage(item.certificateUrl)}
                 className={`p-4 rounded-xl transition-all border flex flex-col justify-between group ${
                   hasCert ? 'cursor-pointer' : ''
                 } ${

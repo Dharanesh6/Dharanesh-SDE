@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { CERTIFICATIONS } from '../data/portfolioData';
 import type { CertificateModalData, CertificationItem } from '../types/portfolio';
+import { preloadCertificateImage } from '../utils/assetUrl';
 
 interface CertificationsProps {
   onViewCertificate?: (cert: CertificateModalData) => void;
@@ -115,6 +116,14 @@ export function Certifications({ onViewCertificate }: CertificationsProps) {
               <div
                 key={cert.id}
                 onClick={() => hasCert && handleOpenCertificate(cert)}
+                onMouseEnter={() => {
+                  if (hasCert) {
+                    preloadCertificateImage(cert.certificateUrl);
+                    if (cert.certificateImages) {
+                      cert.certificateImages.forEach((img) => preloadCertificateImage(img.url));
+                    }
+                  }
+                }}
                 className={`p-4 rounded-xl bg-dark-surface/70 light:bg-white border border-white/5 light:border-slate-200 flex flex-col justify-between hover:border-emerald-500/40 transition-all group ${
                   hasCert ? 'cursor-pointer' : ''
                 }`}
