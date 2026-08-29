@@ -81,7 +81,7 @@ LOCATION: Coimbatore, Tamil Nadu, India (Open to Relocation, Remote, and Hybrid)
 
 ACADEMIC BACKGROUND:
 - B.Tech in Information Technology @ Kumaraguru College of Technology (KCT), Coimbatore (2026–Present)
-- Diploma in Computer Science & Engineering @ Sri Ramakrishna Polytechnic College (SRPTC), Coimbatore (2023–2026) — Distinction, Class Representative, Lead Developer of 8+ systems, Winner of 7 technical awards.
+- Diploma in Computer Science & Engineering @ Sri Ramakrishna Polytechnic College (SRPTC), Coimbatore (2023–2026) — 9.78 CGPA (Top Tier Distinction), Class Representative, Lead Developer of 8+ systems, Winner of 7 technical awards.
 
 MY 8+ MAJOR ENGINEERING SYSTEMS:
 1. Smart IoT Vehicle Telematics & Accident Detection System (ESP32, GPS NEO-6M, GSM SIM800L, 4.5G Impact Thresholds, Cloud Telemetry)
@@ -243,8 +243,8 @@ export function generateLocalRuleResponse(query: string): {
         `  I thrive under high pressure, having won **1st Prize in National Level Competitive Programming (Code Busters @ KGiSL)**, **1st Prize in Code Debugging @ SRPTC**, **1st Prize in Vedic Math Quiz @ SREC**, and multiple paper presentation awards.\n\n` +
         `* 📜 **3. 25+ Verified Industry Certifications**:\n` +
         `  I have continuously up-skilled across **GenAI, Cloud Observability (OpenTelemetry), Web Security (OWASP Top 10), JMeter Performance Testing, Python, Java, and Database Utilities** via *Infosys, IBM, GUVI, and Udemy*.\n\n` +
-        `* 🧠 **4. Algorithmic CS Mastery (DSA in Java & Python)**:\n` +
-        `  From my Diploma in CSE (graduating with top distinction as Class Representative) to my current **B.Tech in IT at Kumaraguru College of Technology (KCT)**, I bring deep fundamentals in data structures, algorithms, and modular design.\n\n` +
+        `* 🧠 **4. Algorithmic CS Mastery & Academic Rigor (9.78 CGPA Distinction)**:\n` +
+        `  I graduated from my **Diploma in CSE at SRPTC with a 9.78 CGPA (Top Distinction)** as Class Representative. Now at **Kumaraguru College of Technology (KCT, B.Tech IT)**, I bring deep fundamentals in data structures, algorithms (Java/Python), and modular software design.\n\n` +
         `* ⚡ **5. Fast Execution & Product Ownership**:\n` +
         `  I take full ownership from problem definition to architecture, coding, testing, and production deployment.\n\n` +
         `**Current Availability**: I am actively seeking **SDE Internships, Graduate Software Engineer, & AI Engineering roles** (Coimbatore, Bangalore, Hybrid & Remote).`,
@@ -260,7 +260,7 @@ export function generateLocalRuleResponse(query: string): {
   if (/^(hi|hello|hey|greetings|hola|namaste|sup|who are you|introduce yourself)/i.test(q)) {
     return {
       text: `👋 **Hi! I'm Dharanesh K**, a Software Development & AI Engineer.\n\n` +
-        `I am currently pursuing my **B.Tech in IT @ Kumaraguru College of Technology (KCT)** after graduating with distinction in my **Diploma in CSE @ Sri Ramakrishna Polytechnic College (SRPTC)**.\n\n` +
+        `I am currently pursuing my **B.Tech in IT @ Kumaraguru College of Technology (KCT)** after graduating with a **9.78 CGPA (Top Distinction) in my Diploma in CSE @ Sri Ramakrishna Polytechnic College (SRPTC)**.\n\n` +
         `I have built **8+ major software & IoT systems**, won **7 state and national awards**, and earned **25+ verified industry certifications** in AI, Cloud, and Security.\n\n` +
         `Feel free to ask me anything about my projects, coding skills, awards, or career availability!`,
       actions: [
@@ -276,7 +276,7 @@ export function generateLocalRuleResponse(query: string): {
     return {
       text: `### 👨‍💻 About Me — Dharanesh K\n\n` +
         `I am a passionate **Software Engineer & AI Builder** based in Coimbatore, Tamil Nadu. My passion lies at the intersection of robust backend software, applied AI algorithms, and connected hardware.\n\n` +
-        `* 🏛️ **My Foundation**: I completed my **Diploma in Computer Science & Engineering at Sri Ramakrishna Polytechnic College (SRPTC)** (2023–2026), graduating with top academic standing. I served as **Class Representative** and led technical cohorts to build 8+ systems, winning 7 awards.\n` +
+        `* 🏛️ **My Foundation**: I completed my **Diploma in Computer Science & Engineering at Sri Ramakrishna Polytechnic College (SRPTC)** (2023–2026), graduating with a **9.78 CGPA (Top Academic Standing & Distinction)**. I served as **Class Representative** and led technical cohorts to build 8+ systems, winning 7 awards.\n` +
         `* 🎓 **Current Trajectory**: I am advancing my **B.Tech in Information Technology at Kumaraguru College of Technology (KCT)**, concentrating on Data Structures & Algorithms in Java/Python, scalable distributed architectures, and real-time computer vision.\n` +
         `* 🎯 **My Goal**: To engineer high-impact software systems, scalable cloud services, and intelligent products that solve real-world problems.`,
       actions: [
@@ -459,8 +459,25 @@ export function generateLocalRuleResponse(query: string): {
     };
   }
 
-  // 9. EDUCATION & INSTITUTIONS
-  if (/education|college|university|degree|diploma|b\.?tech|kct|srptc|school|study|cgpa|academic/i.test(q)) {
+  // 9. SPECIFIC CGPA & ACADEMIC SCORE QUERY
+  if (/cgpa|gpa|marks|percentage|percentage|grade|academic score|standing/i.test(q)) {
+    return {
+      text: `### 🎯 My Academic CGPA & Standing\n\n` +
+        `* 🏅 **Diploma in CSE @ Sri Ramakrishna Polytechnic College (SRPTC)** (2023–2026):\n` +
+        `  - **CGPA**: **9.78 / 10.0 (97.8% Top Tier Distinction)**\n` +
+        `  - Maintained consistent top-rank academic performance across all semesters.\n` +
+        `  - Served as **Class Representative** (60+ CSE students) and Lead Developer for 8+ departmental systems.\n\n` +
+        `* 🎓 **B.Tech in Information Technology @ Kumaraguru College of Technology (KCT)** (2026–Present):\n` +
+        `  - Concentrating on Data Structures & Algorithms in Java & Python, Scalable Distributed Backends, and Computer Vision.`,
+      actions: [
+        { label: '🗺️ View My Roadmap', actionType: 'scroll', target: 'journey' },
+        { label: '📜 View Certifications', actionType: 'scroll', target: 'certifications' },
+      ],
+    };
+  }
+
+  // 10. EDUCATION & INSTITUTIONS
+  if (/education|college|university|degree|diploma|b\.?tech|kct|srptc|school|study|academic/i.test(q)) {
     return {
       text: `### 🎓 My Academic Education & Background\n\n` +
         `1. **B.Tech in Information Technology** (2026 – Present)\n` +
@@ -468,7 +485,7 @@ export function generateLocalRuleResponse(query: string): {
         `   * 🎯 *Focus*: Data Structures & Algorithms in Java & Python, Scalable Distributed Systems, Computer Vision, and Applied AI.\n\n` +
         `2. **Diploma in Computer Science & Engineering** (2023 – 2026)\n` +
         `   * 🏛️ **Sri Ramakrishna Polytechnic College (SRPTC)**, Coimbatore\n` +
-        `   * 🏅 *Distinction*: Top academic rank, **Class Representative**, Lead Developer for 8+ institutional/research systems, winner of 7 State/National technical awards.\n\n` +
+        `   * 🏅 *Distinction*: **9.78 CGPA (Top Distinction)**, **Class Representative**, Lead Developer for 8+ institutional/research systems, winner of 7 State/National technical awards.\n\n` +
         `3. **Continuous Industry Learning**:\n` +
         `   * Over **25+ verified technical certifications** in GenAI, OpenTelemetry, OWASP, Java Tools, and Python.`,
       actions: [

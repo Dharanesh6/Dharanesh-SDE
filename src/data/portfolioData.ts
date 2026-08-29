@@ -29,13 +29,14 @@ export const PERSONAL_INFO = {
   educationShort: 'B.Tech Information Technology',
   institution: 'Kumaraguru College of Technology (KCT)',
   statement:
-    'Software Engineer & AI Builder with foundational rigor from a Diploma in CSE @ Sri Ramakrishna Polytechnic College (SRPTC) and 25+ verified certifications in AI, Cloud & Security. Currently pursuing B.Tech in IT @ Kumaraguru College of Technology (KCT), building 8+ robust physical-digital systems and scalable architectures.',
+    'Software Engineer & AI Builder with foundational rigor from a Diploma in CSE @ Sri Ramakrishna Polytechnic College (SRPTC) (9.78 CGPA Top Distinction) and 25+ verified certifications in AI, Cloud & Security. Currently pursuing B.Tech in IT @ Kumaraguru College of Technology (KCT), building 8+ robust physical-digital systems and scalable architectures.',
   educationSummary: {
     diploma: {
       institution: 'Sri Ramakrishna Polytechnic College (SRPTC)',
       degree: 'Diploma in Computer Science & Engineering',
       period: '2023 – 2026',
-      highlights: 'Top academic standing, 7 National/State Awards, Lead Developer for 8+ systems, Class Representative',
+      cgpa: '9.78 / 10.0',
+      highlights: '9.78 CGPA (Top Distinction), 7 National/State Awards, Lead Developer for 8+ systems, Class Representative',
     },
     btech: {
       institution: 'Kumaraguru College of Technology (KCT)',
@@ -56,12 +57,12 @@ export const PERSONAL_INFO = {
 };
 
 export const STATS = [
+  { label: 'Diploma CSE Standing', value: '9.78', sub: 'CGPA Top Distinction @ SRPTC' },
   { label: 'Major Projects & Systems', value: '8+', sub: 'Software, IoT, Vision & AI' },
   { label: 'Verified Prize Awards', value: '7', sub: 'National & State Level Wins' },
   { label: 'Technical Symposiums', value: '10+', sub: 'State & National Competitions' },
   { label: 'Certifications Completed', value: '25+', sub: 'AI, Cloud, Security & Dev' },
   { label: 'Hands-on AI Internship', value: '50h', sub: 'AI System Design @ SREC' },
-  { label: 'Workshops & Bootcamps', value: '3', sub: 'Networking, AR/VR & Vedic Math' },
 ];
 
 export const JOURNEY_ROADMAP: JourneyMilestone[] = [
@@ -71,11 +72,11 @@ export const JOURNEY_ROADMAP: JourneyMilestone[] = [
     title: 'Diploma in Computer Science & Engineering',
     institution: 'Sri Ramakrishna Polytechnic College (SRPTC)',
     location: 'Coimbatore',
-    badge: 'Completed with Distinction',
+    badge: '9.78 CGPA • Top Distinction',
     description:
-      'Built a robust engineering foundation spanning low-level firmware, IoT kinematics, Java NLP systems, full-stack web platforms, and 25+ verified technical certifications. Led multi-disciplinary teams across 8+ major projects, served as Class Representative, and won 7 verified symposium prize awards.',
+      'Built a stellar engineering foundation with a 9.78 CGPA across all academic semesters, spanning low-level firmware, IoT kinematics, Java NLP systems, full-stack web platforms, and 25+ verified technical certifications. Led multi-disciplinary teams across 8+ major projects, served as Class Representative, and won 7 verified symposium prize awards.',
     achievements: [
-      'Graduated with consistent top-tier academic standing & distinction',
+      'Graduated with 9.78 CGPA (Top Distinction) across all academic semesters',
       'Team Lead & Main Developer for 8+ software, IoT & AI engineering systems',
       '25+ Industry Certifications from Infosys Springboard, IBM, GUVI & Udemy',
       'Won 1st Prize in National Level Code Busters at KGiSL & 6 other awards',

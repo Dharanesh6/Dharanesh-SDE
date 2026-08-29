@@ -123,7 +123,7 @@ export function About() {
                   I am a passionate <strong className="text-white light:text-slate-900 font-semibold">Software Development & AI Engineer</strong> driven by building end-to-end products that connect intelligent algorithms with real-world utility.
                 </p>
                 <p>
-                  My engineering foundation was forged during my <strong className="text-brand-cyan font-semibold">Diploma in CSE at Sri Ramakrishna Polytechnic College (SRPTC)</strong> (2023–2026), graduating with top distinction. I led multidisciplinary teams to engineer <strong className="text-white light:text-slate-900 font-semibold">8+ major physical-digital systems</strong> spanning IoT telematics, Java NLP engines, and full-stack web portals, earning 7 verified technical awards.
+                  My engineering foundation was forged during my <strong className="text-brand-cyan font-semibold">Diploma in CSE at Sri Ramakrishna Polytechnic College (SRPTC)</strong> (2023–2026), graduating with a <strong className="text-emerald-400 font-bold">9.78 CGPA (Top Distinction)</strong>. I led multidisciplinary teams to engineer <strong className="text-white light:text-slate-900 font-semibold">8+ major physical-digital systems</strong> spanning IoT telematics, Java NLP engines, and full-stack web portals, earning 7 verified technical awards.
                 </p>
                 <p>
                   Currently advancing my <strong className="text-brand-violet-glow light:text-brand-violet font-semibold">B.Tech in IT @ Kumaraguru College of Technology (KCT)</strong>, I focus on DSA in Java & Python, high-throughput microservice backends, and low-latency computer vision pipelines.
@@ -202,7 +202,7 @@ export function About() {
                 <div className="p-3.5 rounded-xl bg-dark-bg/80 light:bg-slate-100 border border-brand-blue/30 relative overflow-hidden group hover:border-brand-blue/60 transition-all">
                   <div className="flex items-center justify-between gap-2 mb-1">
                     <span className="text-[10px] font-mono px-2 py-0.2 rounded-full bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">
-                      COMPLETED WITH DISTINCTION
+                      9.78 CGPA • TOP DISTINCTION
                     </span>
                     <span className="text-[10px] font-mono text-slate-400">
                       2023 – 2026
@@ -218,6 +218,10 @@ export function About() {
                   </p>
 
                   <ul className="mt-2 space-y-1 text-[11px] text-slate-300 light:text-slate-700">
+                    <li className="flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
+                      <span>Graduated with <strong>9.78 CGPA</strong> (Top Tier Distinction)</span>
+                    </li>
                     <li className="flex items-center gap-1.5">
                       <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
                       <span>Led 8+ engineering hardware, web & AI systems</span>
