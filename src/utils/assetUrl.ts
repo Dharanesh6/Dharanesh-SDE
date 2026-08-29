@@ -1,4 +1,4 @@
-const ASSET_VERSION = 'v2.4';
+const ASSET_VERSION = 'v2.5';
 
 /**
  * Resolves static asset paths with 100% reliability across all hosting environments:
