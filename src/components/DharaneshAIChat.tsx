@@ -11,9 +11,12 @@ import {
   ArrowRight,
   ExternalLink,
   Terminal,
+  Key,
+  Check,
+  Zap,
 } from 'lucide-react';
 import {
-  generateAIResponse,
+  getDharaneshAIResponse,
   SUGGESTED_PROMPTS,
   type ChatMessage,
 } from '../utils/dharaneshAiEngine';
@@ -31,12 +34,33 @@ export function DharaneshAIChat({ onScrollToSection }: DharaneshAIChatProps) {
   const [isTyping, setIsTyping] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
   const [showNotificationBadge, setShowNotificationBadge] = useState(true);
+  const [showApiKeyModal, setShowApiKeyModal] = useState(false);
+  const [apiKeyInput, setApiKeyInput] = useState(() => {
+    try {
+      return localStorage.getItem('dk_gemini_key') || '';
+    } catch {
+      return '';
+    }
+  });
+  const [hasSavedKey, setHasSavedKey] = useState(() => {
+    try {
+      return Boolean(localStorage.getItem('dk_gemini_key'));
+    } catch {
+      return false;
+    }
+  });
 
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 'welcome-1',
       sender: 'ai',
-      text: `👋 **Hi there! I'm Dharanesh AI**, your personal recruiter & engineering assistant.\n\nI have complete knowledge of Dharanesh's **8+ major systems (IoT, NLP, Web, CV), 7 state/national prize awards, 25+ verified AI & Cloud certifications**, education at **KCT & SRPTC**, and full-stack technical competencies.\n\nWhat would you like to explore? Ask me anything or click a prompt below!`,
+      text: `👋 **Hi there! I'm Dharanesh AI**, your personal recruiter & engineering assistant.\n\n` +
+        `I operate with **First-Priority Ground Truth Rules** directly linked to Dharanesh's portfolio data:\n\n` +
+        `* 🚀 **8+ Systems Built** (IoT Telematics, Novel Nest, SRPTC Portals, Computer Vision)\n` +
+        `* 🏆 **7 Verified Prize Awards** (1st Prize Code Busters @ KGiSL, 1st Prize Code Debugging @ SRPTC, Vedic Math Quiz)\n` +
+        `* 📜 **25+ Industry Certifications** (GenAI, OpenTelemetry, OWASP, Python, Java)\n` +
+        `* 🎓 **Education at KCT & SRPTC** with top distinction\n\n` +
+        `What would you like to explore? Ask me anything or click a prompt below!`,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       actions: [
         { label: '💼 Recruiter 60-Sec Summary', actionType: 'scroll', target: 'about' },
@@ -75,6 +99,20 @@ export function DharaneshAIChat({ onScrollToSection }: DharaneshAIChatProps) {
     }
   }, [isOpen]);
 
+  // Save API Key
+  const handleSaveApiKey = () => {
+    try {
+      if (apiKeyInput.trim()) {
+        localStorage.setItem('dk_gemini_key', apiKeyInput.trim());
+        setHasSavedKey(true);
+      } else {
+        localStorage.removeItem('dk_gemini_key');
+        setHasSavedKey(false);
+      }
+      setShowApiKeyModal(false);
+    } catch {}
+  };
+
   // Handle Action Click (e.g. scroll to section or open link)
   const handleActionClick = (action: NonNullable<ChatMessage['actions']>[0]) => {
     if (action.actionType === 'scroll') {
@@ -87,7 +125,6 @@ export function DharaneshAIChat({ onScrollToSection }: DharaneshAIChatProps) {
           el.scrollIntoView({ behavior: 'smooth' });
         }
       }
-      // On mobile screens, minimize modal to show the scrolled section
       if (window.innerWidth < 768) {
         setIsOpen(false);
       }
@@ -97,7 +134,7 @@ export function DharaneshAIChat({ onScrollToSection }: DharaneshAIChatProps) {
   };
 
   // Submit User Message
-  const handleSendMessage = (textToSend?: string) => {
+  const handleSendMessage = async (textToSend?: string) => {
     const text = (textToSend || inputValue).trim();
     if (!text || isTyping) return;
 
@@ -113,20 +150,23 @@ export function DharaneshAIChat({ onScrollToSection }: DharaneshAIChatProps) {
     setInputValue('');
     setIsTyping(true);
 
-    // Simulate AI thinking and realistic streaming response
-    setTimeout(() => {
-      const response = generateAIResponse(text);
+    try {
+      const response = await getDharaneshAIResponse(text, messages);
       const aiMsg: ChatMessage = {
         id: `ai-${Date.now()}`,
         sender: 'ai',
         text: response.text,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         actions: response.actions,
+        isApiPowered: response.isApiPowered,
       };
 
       setMessages((prev) => [...prev, aiMsg]);
+    } catch (err) {
+      console.error('Chat generation error:', err);
+    } finally {
       setIsTyping(false);
-    }, 450);
+    }
   };
 
   // Reset conversation
@@ -202,20 +242,15 @@ export function DharaneshAIChat({ onScrollToSection }: DharaneshAIChatProps) {
   };
 
   const parseInlineMarkdown = (text: string) => {
-    // Basic regex replacer for **bold**, *italic*, `code`, and [link](url)
     const parts = [];
     let remaining = text;
     let keyIdx = 0;
 
     while (remaining.length > 0) {
-      // Check for link [title](url)
       const linkMatch = remaining.match(/\[([^\]]+)\]\(([^)]+)\)/);
-      // Check for **bold**
       const boldMatch = remaining.match(/\*\*([^*]+)\*\*/);
-      // Check for `code`
       const codeMatch = remaining.match(/`([^`]+)`/);
 
-      // Find first occurrence
       const matches = [
         linkMatch ? { type: 'link', match: linkMatch, index: linkMatch.index! } : null,
         boldMatch ? { type: 'bold', match: boldMatch, index: boldMatch.index! } : null,
@@ -272,7 +307,6 @@ export function DharaneshAIChat({ onScrollToSection }: DharaneshAIChatProps) {
       {/* ========================================================= */}
       {!isOpen && (
         <div className="fixed bottom-5 right-5 z-40 flex items-center gap-3">
-          {/* Subtle Callout Bubble */}
           {!hasInteracted && (
             <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-dark-card/95 light:bg-white/95 border border-brand-blue/40 shadow-xl backdrop-blur-md animate-bounce pointer-events-none">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
@@ -282,13 +316,11 @@ export function DharaneshAIChat({ onScrollToSection }: DharaneshAIChatProps) {
             </div>
           )}
 
-          {/* Trigger Button */}
           <button
             onClick={() => setIsOpen(true)}
             aria-label="Open Ask Dharanesh AI Assistant"
             className="group relative flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-tr from-brand-blue via-brand-violet to-brand-cyan p-[2px] shadow-2xl shadow-brand-blue/40 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
           >
-            {/* Pulsing Ambient Halo */}
             <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-brand-blue via-brand-violet to-brand-cyan blur-md opacity-75 group-hover:opacity-100 animate-pulse transition-opacity pointer-events-none" />
 
             <div className="relative w-full h-full rounded-full bg-dark-bg overflow-hidden flex items-center justify-center">
@@ -302,12 +334,10 @@ export function DharaneshAIChat({ onScrollToSection }: DharaneshAIChatProps) {
               </picture>
             </div>
 
-            {/* AI Sparkle Badge */}
             <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-brand-violet border-2 border-dark-bg flex items-center justify-center text-white shadow-md">
               <Sparkles className="w-2.5 h-2.5 animate-spin text-brand-cyan" />
             </div>
 
-            {/* Unread Ping Dot */}
             {showNotificationBadge && (
               <span className="absolute top-0 left-0 flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -351,18 +381,31 @@ export function DharaneshAIChat({ onScrollToSection }: DharaneshAIChatProps) {
                   <h3 className="font-display font-bold text-sm text-white light:text-slate-900 leading-tight">
                     Ask Dharanesh AI
                   </h3>
-                  <span className="px-1.5 py-0.2 rounded text-[10px] font-mono bg-brand-violet/20 text-brand-violet-glow border border-brand-violet/30">
-                    v2.0
+                  <span className="px-1.5 py-0.2 rounded text-[10px] font-mono bg-brand-violet/20 text-brand-violet-glow border border-brand-violet/30 flex items-center gap-1">
+                    <Zap className="w-2.5 h-2.5 text-brand-cyan" />
+                    <span>{hasSavedKey ? 'Gemini 2.0' : 'Ground-Truth'}</span>
                   </span>
                 </div>
                 <p className="text-[11px] font-mono text-slate-400 light:text-slate-500">
-                  Interactive Recruiter & Portfolio Assistant
+                  Strict Rule Knowledge Base & Portfolio AI
                 </p>
               </div>
             </div>
 
             {/* Modal Controls */}
             <div className="flex items-center gap-1">
+              <button
+                onClick={() => setShowApiKeyModal((prev) => !prev)}
+                title={hasSavedKey ? 'API Key Configured (Gemini 2.0 Flash)' : 'Configure Gemini API Key'}
+                className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
+                  hasSavedKey
+                    ? 'text-brand-cyan bg-brand-cyan/10 hover:bg-brand-cyan/20'
+                    : 'text-slate-400 hover:text-white light:hover:text-slate-900 hover:bg-white/10'
+                }`}
+              >
+                <Key className="w-4 h-4" />
+              </button>
+
               <button
                 onClick={handleResetChat}
                 title="Reset conversation"
@@ -388,6 +431,37 @@ export function DharaneshAIChat({ onScrollToSection }: DharaneshAIChatProps) {
               </button>
             </div>
           </div>
+
+          {/* API Key Configuration Drawer */}
+          {showApiKeyModal && (
+            <div className="p-3 bg-dark-card border-b border-brand-violet/30 text-xs space-y-2 animate-in slide-in-from-top-2">
+              <div className="flex items-center justify-between text-slate-200 font-mono">
+                <span className="font-semibold text-brand-cyan flex items-center gap-1.5">
+                  <Key className="w-3.5 h-3.5" /> Optional Gemini API Key
+                </span>
+                <span className="text-[10px] text-slate-400">Default: High-Speed Ground Truth</span>
+              </div>
+              <p className="text-[11px] text-slate-400 leading-normal">
+                Enter your Google Gemini API key to enable live Gemini 2.0 Flash reasoning. Without a key, the AI uses its built-in portfolio ground-truth engine.
+              </p>
+              <div className="flex items-center gap-2">
+                <input
+                  type="password"
+                  value={apiKeyInput}
+                  onChange={(e) => setApiKeyInput(e.target.value)}
+                  placeholder="AIzaSy..."
+                  className="flex-1 bg-dark-bg border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono placeholder:text-slate-600 focus:outline-none focus:border-brand-cyan"
+                />
+                <button
+                  onClick={handleSaveApiKey}
+                  className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-brand-blue to-brand-violet text-white font-mono font-semibold text-xs flex items-center gap-1 cursor-pointer"
+                >
+                  <Check className="w-3.5 h-3.5" />
+                  <span>Save</span>
+                </button>
+              </div>
+            </div>
+          )}
 
           {/* Messages Area */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4 scroll-smooth">
@@ -434,9 +508,10 @@ export function DharaneshAIChat({ onScrollToSection }: DharaneshAIChatProps) {
                       </div>
                     )}
 
-                    {/* Timestamp */}
-                    <div className="text-[10px] font-mono text-slate-400 light:text-slate-500 text-right mt-1 opacity-70">
-                      {msg.timestamp}
+                    {/* Timestamp & Engine Indicator */}
+                    <div className="flex items-center justify-between text-[10px] font-mono text-slate-400 light:text-slate-500 mt-1 opacity-70">
+                      <span>{msg.isApiPowered ? '⚡ Gemini 2.0 Flash' : '🎯 Ground-Truth Engine'}</span>
+                      <span>{msg.timestamp}</span>
                     </div>
                   </div>
 
@@ -456,7 +531,7 @@ export function DharaneshAIChat({ onScrollToSection }: DharaneshAIChatProps) {
                   <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-bounce" />
                   <span className="w-1.5 h-1.5 rounded-full bg-brand-violet animate-bounce [animation-delay:0.2s]" />
                   <span className="w-1.5 h-1.5 rounded-full bg-brand-blue animate-bounce [animation-delay:0.4s]" />
-                  <span className="ml-1 text-[11px] text-slate-300">Dharanesh AI is formulating response...</span>
+                  <span className="ml-1 text-[11px] text-slate-300">Dharanesh AI is consulting ground-truth knowledge...</span>
                 </div>
               </div>
             )}
@@ -468,7 +543,7 @@ export function DharaneshAIChat({ onScrollToSection }: DharaneshAIChatProps) {
           <div className="px-3 py-2 border-t border-white/10 light:border-slate-200 bg-dark-surface/50 light:bg-slate-50">
             <div className="text-[10px] font-mono uppercase text-slate-400 tracking-wider mb-1.5 flex items-center gap-1">
               <Terminal className="w-3 h-3 text-brand-cyan" />
-              <span>Suggested Inquiries:</span>
+              <span>Priority Inquiries:</span>
             </div>
             <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
               {SUGGESTED_PROMPTS.map((p) => (

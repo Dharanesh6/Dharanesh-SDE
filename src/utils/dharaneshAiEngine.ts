@@ -1,6 +1,7 @@
 import {
   PERSONAL_INFO,
   PROJECTS,
+  ACHIEVEMENTS,
   CERTIFICATIONS,
 } from '../data/portfolioData';
 
@@ -9,11 +10,11 @@ export interface ChatMessage {
   sender: 'user' | 'ai';
   text: string;
   timestamp: string;
+  isApiPowered?: boolean;
   actions?: Array<{
     label: string;
     actionType: 'scroll' | 'link' | 'copy';
     target: string;
-    icon?: string;
   }>;
 }
 
@@ -33,9 +34,185 @@ export const SUGGESTED_PROMPTS: SuggestedPrompt[] = [
 ];
 
 /**
- * Intelligent client-side AI response generator for Dharanesh's portfolio
+ * STRICT SYSTEM INSTRUCTIONS & GROUND TRUTH KNOWLEDGE BASE
+ * First Priority: All answers MUST be strictly derived from this verified website data.
  */
-export function generateAIResponse(query: string): {
+export const DHARANESH_SYSTEM_PROMPT = `
+You are "Dharanesh AI", the official intelligent AI representative and portfolio assistant for Dharanesh K.
+Your mission is to represent Dharanesh to recruiters, hiring managers, tech leads, and developers with absolute precision, technical depth, and professionalism.
+
+=======================================================
+STRICT SYSTEM RULES & GUIDELINES (FIRST PRIORITY):
+=======================================================
+1. FIRST PRIORITY — GROUND TRUTH KNOWLEDGE:
+   - Always prioritize and base your answers on the verified portfolio data provided below.
+   - NEVER hallucinate or invent companies, degrees, awards, or projects that do not exist in this data.
+   - If a question asks for details not present, accurately state what Dharanesh specializes in based on his real portfolio.
+
+2. IDENTITY & TONE:
+   - Persona: Technical, articulate, confident, humble, and results-oriented.
+   - Perspective: You speak as Dharanesh's AI assistant ("Dharanesh is...", "He has built...").
+   - Formatting: Use structured Markdown (bullet points, bold highlights, tech tags, and short paragraphs). Avoid huge unbroken walls of text.
+
+3. ACTION TAGS FOR UI INTERACTION:
+   - Whenever relevant, you can include action triggers in your response so the interactive UI renders quick jump buttons for the user:
+     * To recommend projects: include [action:projects:Explore Projects]
+     * To recommend awards: include [action:achievements:View Awards]
+     * To recommend skills: include [action:skills:Inspect Skills]
+     * To recommend AI lab: include [action:ai-lab:Open AI Lab]
+     * To recommend certifications: include [action:certifications:View Certificates]
+     * To recommend contact: include [action:contact:Contact Dharanesh]
+
+4. OUT-OF-SCOPE INQUIRIES:
+   - If asked general questions (e.g. general coding tips, history, weather), provide a brief helpful answer and seamlessly connect it back to Dharanesh's software engineering strengths.
+
+=======================================================
+VERIFIED PORTFOLIO GROUND TRUTH DATA:
+=======================================================
+DEVELOPER: ${PERSONAL_INFO.name}
+ROLE: ${PERSONAL_INFO.roleTitle} (${PERSONAL_INFO.roles.join(', ')})
+LOCATION: ${PERSONAL_INFO.location}
+EMAIL: ${PERSONAL_INFO.social.email}
+GITHUB: ${PERSONAL_INFO.social.github}
+LINKEDIN: ${PERSONAL_INFO.social.linkedin}
+LEETCODE: ${PERSONAL_INFO.social.leetcode}
+
+ACADEMIC TRAJECTORY:
+- B.Tech in Information Technology @ Kumaraguru College of Technology (KCT), Coimbatore (2026–Present)
+- Diploma in Computer Science & Engineering @ Sri Ramakrishna Polytechnic College (SRPTC), Coimbatore (2023–2026) — Distinction, Class Representative, Lead Developer of 8+ systems, 7 Technical Awards.
+
+MAJOR ENGINEERING SYSTEMS (8+ PROJECTS):
+${PROJECTS.map(
+  (p, idx) =>
+    `${idx + 1}. [${p.title}] (${p.category})
+   - Domain: ${p.domain}
+   - Tech Stack: ${p.techStack.join(', ')}
+   - Summary: ${p.summary}
+   - Problem: ${p.problem}
+   - Architecture & Outcome: ${p.solution}`
+).join('\n\n')}
+
+VERIFIED AWARDS & COMPETITIONS (7 PRIZES + 10 PARTICIPATIONS):
+${ACHIEVEMENTS.map(
+  (a, idx) =>
+    `${idx + 1}. ${a.prize} in ${a.title} @ ${a.institution} (${a.event}, ${a.level}) — ${a.date}`
+).join('\n')}
+
+VERIFIED CERTIFICATIONS (25+ CREDENTIALS):
+${CERTIFICATIONS.map((c) => `- ${c.title} (${c.issuer} / ${c.platform}, ${c.date})`).join('\n')}
+
+HANDS-ON WORKSHOPS & INTERNSHIPS:
+- 50-Hour AI-Powered Integrated System Design Internship @ Sri Ramakrishna Engineering College (SREC)
+- Web Designing Club & PC Troubleshooting Workshop @ SRPTC
+- AR/VR Exploration Workshop @ SRPTC Computer Engineering Dept
+- Vedic Mathematics Skill Development Program @ SREC
+
+TECHNICAL EXPERTISE MATRIX:
+- Programming Languages: Java (DSA, OOP), Python (ML, OpenCV), TypeScript, JavaScript, PHP, C/C++, SQL
+- AI & Computer Vision: OpenCV, MediaPipe, Generative AI & Prompt Engineering, NLP, Biometrics
+- Web & Backend: React, Tailwind CSS, Node.js, PHP, MySQL, REST APIs, Firebase, Vite
+- IoT & Embedded: ESP32, Arduino, GPS/GSM, Accelerometer/Gyro Telematics
+- Testing, Cloud & Tools: OpenTelemetry, JMeter, OWASP Top 10, Git/GitHub CI/CD, Docker
+`;
+
+/**
+ * Extract [action:target:label] tags from AI text into structured actions
+ */
+export function extractActionsFromText(text: string): {
+  cleanText: string;
+  actions: ChatMessage['actions'];
+} {
+  const actions: ChatMessage['actions'] = [];
+  const actionRegex = /\[action:([a-zA-Z0-9_-]+):([^\]]+)\]/g;
+
+  let cleanText = text.replace(actionRegex, (_, target, label) => {
+    actions.push({
+      label,
+      actionType: 'scroll',
+      target,
+    });
+    return '';
+  });
+
+  cleanText = cleanText.trim();
+  return { cleanText, actions };
+}
+
+/**
+ * Calls Gemini API if an API key is provided
+ */
+export async function queryGeminiApi(
+  apiKey: string,
+  userMessage: string,
+  history: ChatMessage[]
+): Promise<{ text: string; actions?: ChatMessage['actions'] }> {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey.trim()}`;
+
+  const conversationContents = [
+    {
+      role: 'user',
+      parts: [{ text: `${DHARANESH_SYSTEM_PROMPT}\n\nPlease acknowledge and follow these instructions strictly.` }],
+    },
+    {
+      role: 'model',
+      parts: [
+        {
+          text: `Understood. I am Dharanesh AI, the official intelligent portfolio representative for Dharanesh K. I will strictly prioritize the verified website data, maintain a professional and technical tone, and provide structured, accurate answers with action tags.`,
+        },
+      ],
+    },
+    // Add past 4 messages for conversational context
+    ...history.slice(-4).map((msg) => ({
+      role: msg.sender === 'user' ? 'user' : 'model',
+      parts: [{ text: msg.text }],
+    })),
+    {
+      role: 'user',
+      parts: [{ text: userMessage }],
+    },
+  ];
+
+  const payload = {
+    contents: conversationContents,
+    generationConfig: {
+      temperature: 0.3, // Low temperature for high accuracy and factual adherence
+      maxOutputTokens: 1000,
+    },
+  };
+
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(
+      errorData.error?.message || `API Error (Status: ${res.status}). Using local intelligence engine.`
+    );
+  }
+
+  const data = await res.json();
+  const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+  const { cleanText, actions } = extractActionsFromText(rawText);
+
+  return {
+    text: cleanText || "I am here to assist with Dharanesh's portfolio. How can I help you?",
+    actions: actions && actions.length > 0 ? actions : [
+      { label: '🚀 View Projects', actionType: 'scroll', target: 'projects' },
+      { label: '🏆 View Awards', actionType: 'scroll', target: 'achievements' },
+      { label: '📫 Contact Info', actionType: 'scroll', target: 'contact' },
+    ],
+  };
+}
+
+/**
+ * High-Speed Local Ground-Truth Rule Engine (Instant, 0-Latency, 100% Reliable Offline)
+ */
+export function generateLocalRuleResponse(query: string): {
   text: string;
   actions?: ChatMessage['actions'];
 } {
@@ -44,7 +221,7 @@ export function generateAIResponse(query: string): {
   // 1. GREETINGS & CASUAL INTROS
   if (/^(hi|hello|hey|greetings|hola|namaste|sup|who are you|what can you do)/i.test(q)) {
     return {
-      text: `👋 **Hello! I'm Dharanesh AI**, the intelligent portfolio assistant for **Dharanesh K**.\n\nI can answer anything about Dharanesh's **software architecture, 8+ major projects, 7 national/state prize awards, 25+ verified AI/Cloud certifications, tech stack (Java, Python, IoT, React, PHP, SQL)**, or his availability for **SDE & AI Engineering roles**!\n\nHow can I help you today? You can ask freely or click any suggestion below!`,
+      text: `👋 **Hello! I'm Dharanesh AI**, the intelligent portfolio assistant for **Dharanesh K**.\n\nI operate with direct ground-truth knowledge of Dharanesh's **8+ major systems (IoT, Java NLP, PHP/MySQL, Computer Vision), 7 national/state prize awards, 25+ verified AI/Cloud certifications**, and education at **KCT & SRPTC**.\n\nHow can I help you today? You can ask freely or click any suggestion below!`,
       actions: [
         { label: '💼 Recruiter Pitch', actionType: 'scroll', target: 'about' },
         { label: '🚀 Explore Projects', actionType: 'scroll', target: 'projects' },
@@ -272,8 +449,7 @@ export function generateAIResponse(query: string): {
     };
   }
 
-  // 11. FALLBACK / GENERAL QUERY MATCHING
-  // Search across projects, skills, and achievements
+  // 11. SEARCH ACROSS PORTFOLIO
   const matchingProjects = PROJECTS.filter(
     (p) =>
       p.title.toLowerCase().includes(q) ||
@@ -289,7 +465,7 @@ export function generateAIResponse(query: string): {
   );
 
   if (matchingProjects.length > 0 || matchingCerts.length > 0) {
-    let response = `### 🔍 Found Relevant Portfolio Match:\n\n`;
+    let response = `### 🔍 Relevant Portfolio Ground Truth:\n\n`;
 
     if (matchingProjects.length > 0) {
       response += `**Relevant Systems Built:**\n`;
@@ -318,17 +494,42 @@ export function generateAIResponse(query: string): {
   // Default intelligent fallback
   return {
     text: `I understand you are asking about **"${query}"**.\n\n` +
-      `Dharanesh is a **Software Engineer & AI Builder** with expertise across **Java, Python, IoT, React, PHP/MySQL, Computer Vision, and 25+ verified certifications**.\n\n` +
-      `You can ask me anything about:\n` +
-      `* 💼 **His Background & Recruiter Summary**\n` +
-      `* 🚀 **His 8+ Systems & Flagship Projects**\n` +
-      `* 🏆 **His 7 National & State Prize Awards**\n` +
-      `* 🛠️ **His Technical Skills & DSA Mastery**\n` +
-      `* 📫 **How to Contact or Hire Him**`,
+      `As **Dharanesh AI**, I operate strictly with first-priority knowledge from Dharanesh's portfolio:\n\n` +
+      `* 💼 **Recruiter Overview & Strengths**\n` +
+      `* 🚀 **8+ Systems (IoT Telematics, Novel Nest, SRPTC Portals, CV Studio)**\n` +
+      `* 🏆 **7 Verified National & State Awards**\n` +
+      `* 🛠️ **Full Tech Stack (Java DSA, Python, React, PHP/MySQL, ESP32)**\n` +
+      `* 📜 **25+ Industry Certifications**\n` +
+      `* 📫 **Contact & Hiring Availability**`,
     actions: [
       { label: '💼 Recruiter Pitch', actionType: 'scroll', target: 'about' },
       { label: '🚀 Explore Projects', actionType: 'scroll', target: 'projects' },
       { label: '📫 Contact Info', actionType: 'scroll', target: 'contact' },
     ],
   };
+}
+
+/**
+ * Universal Unified AI Query Handler:
+ * Checks for user Gemini API key first -> queries Gemini LLM with strict rules;
+ * Falls back seamlessly to Local Ground-Truth Rule Engine with 100% reliability.
+ */
+export async function getDharaneshAIResponse(
+  query: string,
+  history: ChatMessage[],
+  customApiKey?: string
+): Promise<{ text: string; actions?: ChatMessage['actions']; isApiPowered: boolean }> {
+  const apiKey = customApiKey || (typeof window !== 'undefined' ? localStorage.getItem('dk_gemini_key') || '' : '');
+
+  if (apiKey.trim()) {
+    try {
+      const apiResult = await queryGeminiApi(apiKey, query, history);
+      return { ...apiResult, isApiPowered: true };
+    } catch (err) {
+      console.warn('Gemini API query failed, falling back to local ground-truth engine:', err);
+    }
+  }
+
+  const localResult = generateLocalRuleResponse(query);
+  return { ...localResult, isApiPowered: false };
 }
