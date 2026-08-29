@@ -66,13 +66,13 @@ export function Hero({
         {/* ========================================================= */}
         {/* PROFESSIONAL AVATAR PORTRAIT WITH CYBER GLOW */}
         {/* ========================================================= */}
-        <div className="relative mb-6 group">
-          {/* Subtle Ambient Backlight Glow */}
-          <div className="absolute -inset-3 bg-gradient-to-r from-brand-blue via-brand-violet to-brand-cyan rounded-full blur-2xl opacity-60 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none" />
+        <div className="relative mb-7 group">
+          {/* Ambient Backlight Glow */}
+          <div className="absolute -inset-4 bg-gradient-to-r from-brand-blue via-brand-violet to-brand-cyan rounded-full blur-3xl opacity-70 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-          {/* Cyber Ring Container - Prominent Size */}
-          <div className="relative w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 rounded-full p-1.5 bg-gradient-to-tr from-brand-blue via-brand-violet to-brand-cyan shadow-2xl shadow-brand-blue/30 transition-transform duration-300 group-hover:scale-[1.02]">
-            <div className="w-full h-full rounded-full overflow-hidden bg-dark-bg border-[3px] border-dark-card relative">
+          {/* Cyber Ring Container - Extra Large Prominent Size */}
+          <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full p-2 bg-gradient-to-tr from-brand-blue via-brand-violet to-brand-cyan shadow-2xl shadow-brand-blue/35 transition-transform duration-300 group-hover:scale-[1.03]">
+            <div className="w-full h-full rounded-full overflow-hidden bg-dark-bg border-[4px] border-dark-card relative shadow-inner">
               <picture>
                 {avatarWebp && <source srcSet={avatarWebp} type="image/webp" />}
                 <img
@@ -87,9 +87,9 @@ export function Hero({
             {/* Verified Badge Icon */}
             <div
               title="Verified Engineer & Builder"
-              className="absolute bottom-1 right-1 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-dark-card border-2 border-brand-cyan flex items-center justify-center shadow-lg shadow-brand-cyan/40 text-brand-cyan"
+              className="absolute bottom-2 right-2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-dark-card border-[2.5px] border-brand-cyan flex items-center justify-center shadow-xl shadow-brand-cyan/40 text-brand-cyan"
             >
-              <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
+              <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
           </div>
         </div>
