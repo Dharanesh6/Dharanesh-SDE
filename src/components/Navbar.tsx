@@ -131,6 +131,16 @@ export function Navbar({ isDark, onToggleTheme, activeSection }: NavbarProps) {
 
         {/* Right Action Controls */}
         <div className="flex items-center gap-2">
+          {/* Ask AI Agent Trigger */}
+          <button
+            onClick={() => window.dispatchEvent(new CustomEvent('open-dharanesh-ai'))}
+            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium font-mono rounded-lg border border-brand-violet/40 bg-brand-violet/10 text-brand-violet-glow hover:bg-brand-violet/20 hover:border-brand-violet transition-all cursor-pointer shadow-xs"
+            title="Ask Dharanesh AI (Interactive Recruiter Assistant)"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-brand-cyan animate-pulse" />
+            <span className="hidden sm:inline">Ask AI</span>
+          </button>
+
           {/* Theme Toggle Button */}
           <button
             onClick={onToggleTheme}
