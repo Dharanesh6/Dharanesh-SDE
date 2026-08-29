@@ -1,3 +1,5 @@
+const ASSET_VERSION = 'v2.4';
+
 /**
  * Resolves static asset paths with 100% reliability across all hosting environments:
  * - Localhost dev server (http://localhost:5173/)
@@ -10,6 +12,7 @@ export function resolveAssetUrl(path?: string): string {
     return path;
   }
   const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  let resolved = '';
 
   if (typeof window !== 'undefined') {
     const origin = window.location.origin;
@@ -20,17 +23,20 @@ export function resolveAssetUrl(path?: string): string {
       const segments = pathname.split('/').filter(Boolean);
       if (segments.length > 0) {
         const repoName = segments[0];
-        return `${origin}/${repoName}/${cleanPath}`;
+        resolved = `${origin}/${repoName}/${cleanPath}`;
       }
     }
 
-    // Default for localhost or root domains
-    return `${origin}/${cleanPath}`;
+    if (!resolved) {
+      resolved = `${origin}/${cleanPath}`;
+    }
+  } else {
+    const baseUrl = import.meta.env.BASE_URL || '/';
+    const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+    resolved = `${cleanBase}${cleanPath}`;
   }
 
-  const baseUrl = import.meta.env.BASE_URL || '/';
-  const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
-  return `${cleanBase}${cleanPath}`;
+  return `${resolved}?v=${ASSET_VERSION}`;
 }
 
 /**
@@ -39,10 +45,9 @@ export function resolveAssetUrl(path?: string): string {
 export function resolveWebpUrl(path?: string): string {
   if (!path) return '';
   const url = resolveAssetUrl(path);
-  if (url.endsWith('.jpg') || url.endsWith('.jpeg')) {
-    return url.replace(/\.(jpg|jpeg)$/i, '.webp');
-  }
-  return url;
+  const [base, query] = url.split('?');
+  const webpBase = base.replace(/\.(jpg|jpeg)$/i, '.webp');
+  return query ? `${webpBase}?${query}` : webpBase;
 }
 
 /**
@@ -59,4 +64,5 @@ export function preloadCertificateImage(path?: string): void {
   const imgJpg = new Image();
   imgJpg.src = jpgUrl;
 }
+
 
