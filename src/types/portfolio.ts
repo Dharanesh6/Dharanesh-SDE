@@ -32,6 +32,7 @@ export interface AchievementItem {
   year: number;
   highlight?: boolean;
   description?: string;
+  certificateUrl?: string;
 }
 
 export interface CertificationItem {
@@ -44,6 +45,8 @@ export interface CertificationItem {
   year: number;
   credentialUrl?: string;
   skills: string[];
+  certificateUrl?: string;
+  certificateImages?: { title: string; url: string; issuer?: string }[];
 }
 
 export interface SkillCategory {
@@ -103,6 +106,7 @@ export interface WorkshopItem {
   keyHighlights: string[];
   skills?: string[];
   badge?: string;
+  certificateUrl?: string;
 }
 
 export interface InternshipItem {
@@ -115,4 +119,19 @@ export interface InternshipItem {
   summary: string;
   keyLearnings: string[];
   skills?: string[];
+  certificateUrl?: string;
 }
+
+export interface CertificateModalData {
+  title: string;
+  subtitle?: string;
+  issuer: string;
+  category?: string;
+  date?: string;
+  imageUrl: string;
+  additionalImages?: { title: string; url: string; issuer?: string }[];
+  skills?: string[];
+  badge?: string;
+  verified?: boolean;
+}
+

@@ -15,11 +15,46 @@ import {
   Network,
   BrainCircuit,
   Award,
+  Eye,
+  FileCheck,
 } from 'lucide-react';
 import { INTERNSHIP, WORKSHOPS, LEADERSHIP_ROLES } from '../data/portfolioData';
+import type { CertificateModalData, WorkshopItem, InternshipItem } from '../types/portfolio';
 
-export function Experience() {
+interface ExperienceProps {
+  onViewCertificate?: (cert: CertificateModalData) => void;
+}
+
+export function Experience({ onViewCertificate }: ExperienceProps) {
   const [activeTab, setActiveTab] = useState<'all' | 'internship' | 'workshops' | 'leadership'>('all');
+
+  const handleOpenInternshipCert = (item: InternshipItem) => {
+    if (!item.certificateUrl || !onViewCertificate) return;
+    onViewCertificate({
+      title: item.title,
+      issuer: item.organization,
+      category: 'AI & Systems Internship',
+      date: item.duration,
+      imageUrl: item.certificateUrl,
+      skills: item.skills,
+      badge: '50h Verified',
+      verified: true,
+    });
+  };
+
+  const handleOpenWorkshopCert = (ws: WorkshopItem) => {
+    if (!ws.certificateUrl || !onViewCertificate) return;
+    onViewCertificate({
+      title: ws.title,
+      issuer: ws.organizer,
+      category: ws.type,
+      date: ws.date,
+      imageUrl: ws.certificateUrl,
+      skills: ws.skills,
+      badge: ws.badge || ws.type,
+      verified: true,
+    });
+  };
 
   const tabs = [
     { id: 'all' as const, label: 'All Experience', count: 1 + WORKSHOPS.length + LEADERSHIP_ROLES.length },
@@ -160,20 +195,35 @@ export function Experience() {
                   </div>
                 </div>
 
-                {/* Skills Tags Strip */}
-                {INTERNSHIP.skills && INTERNSHIP.skills.length > 0 && (
-                  <div className="pt-4 border-t border-white/10 light:border-slate-200 flex flex-wrap items-center gap-1.5">
-                    <span className="text-[11px] font-mono text-slate-400 mr-1.5">Domain Skills:</span>
-                    {INTERNSHIP.skills.map((skill, idx) => (
-                      <span
-                        key={idx}
-                        className="px-2 py-0.5 rounded text-[11px] font-mono bg-dark-card light:bg-white border border-white/10 light:border-slate-300 text-slate-300 light:text-slate-700"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                )}
+                {/* Skills & Certificate Footer Strip */}
+                <div className="pt-4 border-t border-white/10 light:border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  {INTERNSHIP.skills && INTERNSHIP.skills.length > 0 ? (
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <span className="text-[11px] font-mono text-slate-400 mr-1.5">Domain Skills:</span>
+                      {INTERNSHIP.skills.map((skill, idx) => (
+                        <span
+                          key={idx}
+                          className="px-2 py-0.5 rounded text-[11px] font-mono bg-dark-card light:bg-white border border-white/10 light:border-slate-300 text-slate-300 light:text-slate-700"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  ) : (
+                    <div />
+                  )}
+
+                  {INTERNSHIP.certificateUrl && (
+                    <button
+                      type="button"
+                      onClick={() => handleOpenInternshipCert(INTERNSHIP)}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium bg-brand-violet/20 hover:bg-brand-violet/30 text-brand-violet-glow border border-brand-violet/50 transition-all shadow-sm shadow-brand-violet/20 cursor-pointer self-start sm:self-auto"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                      <span>View Internship Certificate</span>
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -200,11 +250,15 @@ export function Experience() {
               {WORKSHOPS.map((workshop) => {
                 const isHardware = workshop.title.toLowerCase().includes('troubleshooting') || workshop.title.toLowerCase().includes('networking');
                 const isARVR = workshop.title.toLowerCase().includes('ar/vr');
+                const hasCert = !!workshop.certificateUrl;
                 
                 return (
                   <div
                     key={workshop.id || workshop.title}
-                    className="card-cyber p-5 flex flex-col justify-between border-white/10 hover:border-brand-cyan/40 group"
+                    onClick={() => hasCert && handleOpenWorkshopCert(workshop)}
+                    className={`card-cyber p-5 flex flex-col justify-between border-white/10 hover:border-brand-cyan/40 group ${
+                      hasCert ? 'cursor-pointer' : ''
+                    }`}
                   >
                     <div>
                       {/* Top Meta Strip */}
@@ -254,25 +308,49 @@ export function Experience() {
                       )}
                     </div>
 
-                    {/* Skill Tags */}
-                    {workshop.skills && workshop.skills.length > 0 && (
-                      <div className="mt-4 pt-3 border-t border-white/10 light:border-slate-200 flex flex-wrap gap-1">
-                        {workshop.skills.map((skill, idx) => (
-                          <span
-                            key={idx}
-                            className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-dark-bg light:bg-slate-100 text-slate-300 light:text-slate-700"
-                          >
-                            {skill}
+                    {/* Skill Tags & Certificate Button */}
+                    <div className="mt-4 pt-3 border-t border-white/10 light:border-slate-200">
+                      {workshop.skills && workshop.skills.length > 0 && (
+                        <div className="flex flex-wrap gap-1 mb-2.5">
+                          {workshop.skills.map((skill, idx) => (
+                            <span
+                              key={idx}
+                              className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-dark-bg light:bg-slate-100 text-slate-300 light:text-slate-700"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+
+                      {hasCert && (
+                        <div className="flex items-center justify-between pt-1">
+                          <span className="text-[10px] font-mono text-brand-cyan flex items-center gap-1">
+                            <FileCheck className="w-3 h-3 text-emerald-400" />
+                            <span>Certificate Verified</span>
                           </span>
-                        ))}
-                      </div>
-                    )}
+
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleOpenWorkshopCert(workshop);
+                            }}
+                            className="inline-flex items-center gap-1 px-2 py-0.8 rounded text-[10px] font-mono font-medium bg-brand-cyan/10 hover:bg-brand-cyan/20 text-brand-cyan border border-brand-cyan/30 transition-colors cursor-pointer"
+                          >
+                            <Eye className="w-3 h-3" />
+                            <span>View Cert</span>
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 );
               })}
             </div>
           </div>
         )}
+
 
         {/* ========================================================= */}
         {/* 3. TECHNICAL LEADERSHIP & STUDENT REPRESENTATION */}

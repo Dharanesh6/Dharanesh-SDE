@@ -663,6 +663,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     highlight: true,
     description:
       'Clinched 1st place in the national-level competitive programming and code busting challenge, outperforming competing teams from engineering institutions across the state.',
+    certificateUrl: '/certificates/prize-01-code-busters-kgisl.jpg',
   },
   {
     id: 'ach-02',
@@ -677,6 +678,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     highlight: true,
     description:
       'Secured 1st prize by diagnosing and fixing complex syntax, memory, and logical bugs across multiple codebases under strict time constraints.',
+    certificateUrl: '/certificates/prize-02-code-debugging-srptc.jpg',
   },
   {
     id: 'ach-03',
@@ -691,6 +693,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     highlight: true,
     description:
       'Awarded 1st place in the rigorous Vedic Mathematics & Speed Computation Quiz organized by Sri Ramakrishna Engineering College.',
+    certificateUrl: '/certificates/prize-03-vedic-math-quiz.jpg',
   },
   {
     id: 'ach-04',
@@ -705,6 +708,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     highlight: true,
     description:
       'Won 1st prize for delivering a technical presentation analyzing the mathematical principles and foundational legacy of Srinivasa Ramanujan.',
+    certificateUrl: '/certificates/prize-04-ramanujan-paper.jpg',
   },
   {
     id: 'ach-05',
@@ -719,6 +723,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     highlight: true,
     description:
       'Achieved 1st place in the technical and mathematical quiz competition conducted by the Institution of Engineers (IE) student chapter.',
+    certificateUrl: '/certificates/prize-05-ramanujan-quiz.jpg',
   },
   {
     id: 'ach-06',
@@ -733,6 +738,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     highlight: true,
     description:
       'Won 2nd prize at the state-level technical symposium for presenting practical research and technical architecture.',
+    certificateUrl: '/certificates/prize-06-polysym24-paper.jpg',
   },
   {
     id: 'ach-07',
@@ -747,6 +753,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     highlight: true,
     description:
       'Secured 3rd prize in the competitive state-level paper presentation track among participants from polytechnic colleges across Tamil Nadu.',
+    certificateUrl: '/certificates/prize-07-infinitum24-paper.jpg',
   },
   // Verified Technical Participations (Accurately documented as participations, not awards)
   {
@@ -760,6 +767,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     date: '05.10.2023',
     year: 2023,
     description: 'Competed in intense algorithmic problem solving and rapid code writing challenges.',
+    certificateUrl: '/certificates/part-01-codextreme-kgisl.jpg',
   },
   {
     id: 'part-02',
@@ -772,6 +780,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     date: '31.01.2024',
     year: 2024,
     description: 'Participated in advanced technical discussions and engineering presentations.',
+    certificateUrl: '/certificates/part-02-polysym24-paper.jpg',
   },
   {
     id: 'part-03',
@@ -784,6 +793,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     date: '22.02.2024',
     year: 2024,
     description: 'Presented technical concepts in software and system design to an academic review panel.',
+    certificateUrl: '/certificates/part-03-srec-paper.jpg',
   },
   {
     id: 'part-04',
@@ -796,6 +806,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     date: '01.03.2024',
     year: 2024,
     description: 'Participated in the state-level technical deduction and problem-solving competition.',
+    certificateUrl: '/certificates/part-04-cluminati-infinitum24.jpg',
   },
   {
     id: 'part-05',
@@ -808,6 +819,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     date: '12.08.2024',
     year: 2024,
     description: 'Represented institution in the state-level awareness and knowledge assessment competition.',
+    certificateUrl: '/certificates/part-05-tansacs-quiz.jpg',
   },
   {
     id: 'part-06',
@@ -820,6 +832,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     date: '20.10.2024',
     year: 2024,
     description: 'Participated in the prestigious national-level mathematical examination conducted by ISTE.',
+    certificateUrl: '/certificates/part-06-iste-ramanujan-math.jpg',
   },
   {
     id: 'part-07',
@@ -832,6 +845,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     date: '07.02.2025',
     year: 2025,
     description: 'Delivered technical paper on contemporary computing technologies at the state symposium.',
+    certificateUrl: '/certificates/part-07-pa-techarena25-paper.jpg',
   },
   {
     id: 'part-08',
@@ -844,6 +858,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     date: '19.02.2025',
     year: 2025,
     description: 'Presented engineering methodologies in computing and IoT architecture.',
+    certificateUrl: '/certificates/part-08-polysym25-paper.jpg',
   },
   {
     id: 'part-09',
@@ -856,6 +871,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     date: '15.09.2025',
     year: 2025,
     description: 'Showcased practical engineering project working model and answered panel questions.',
+    certificateUrl: '/certificates/part-09-srptc-mini-minds.jpg',
   },
   {
     id: 'part-10',
@@ -868,6 +884,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     date: '14.10.2025',
     year: 2025,
     description: 'Participated in the national knowledge assessment initiative conducted by the Government of India.',
+    certificateUrl: '/certificates/part-10-vbyld-quiz.jpg',
   },
 ];
 
@@ -882,6 +899,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '20.12.2025',
     year: 2025,
     skills: ['Generative AI', 'IT Workflow Automation', 'Prompt Engineering'],
+    certificateUrl: '/certificates/cert-01-genai-for-it-infosys.jpg',
   },
   {
     id: 'cert-02',
@@ -892,6 +910,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '20.12.2025',
     year: 2025,
     skills: ['AI Productivity', 'LLM Integration', 'Automation Workflows'],
+    certificateUrl: '/certificates/cert-02-genai-professionals-udemy.jpg',
   },
   {
     id: 'cert-03',
@@ -902,6 +921,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '20.12.2025',
     year: 2025,
     skills: ['ChatGPT', 'Conversational AI', 'Prompt Optimization'],
+    certificateUrl: '/certificates/cert-03-chatgpt-everyone-guvi.jpg',
   },
   {
     id: 'cert-04',
@@ -912,6 +932,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '17.08.2023',
     year: 2023,
     skills: ['AI Foundations', 'Python for AI', 'Skill India Certification'],
+    certificateUrl: '/certificates/cert-04-ai-for-india-guvi.jpg',
   },
 
   // Programming & Cloud
@@ -924,6 +945,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '12.07.2023',
     year: 2023,
     skills: ['Python Syntax', 'Data Structures', 'Algorithmic Logic'],
+    certificateUrl: '/certificates/cert-05-python-basics-infosys.jpg',
   },
   {
     id: 'cert-06',
@@ -934,6 +956,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '21.12.2025',
     year: 2025,
     skills: ['Python OOP', 'Functions & Modules', 'Scripting'],
+    certificateUrl: '/certificates/cert-06-python-basics-udemy.jpg',
   },
   {
     id: 'cert-07',
@@ -944,6 +967,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '26.03.2024',
     year: 2024,
     skills: ['Java Ecosystem', 'Build Tools', 'Development Utilities'],
+    certificateUrl: '/certificates/cert-07-java-tools-infosys.jpg',
   },
   {
     id: 'cert-08',
@@ -954,6 +978,11 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '20.12.2025',
     year: 2025,
     skills: ['OpenTelemetry', 'Cloud Observability', 'Distributed Tracing'],
+    certificateUrl: '/certificates/cert-08-opentelemetry-infosys.jpg',
+    certificateImages: [
+      { title: 'Infosys Springboard Certification', url: '/certificates/cert-08-opentelemetry-infosys.jpg', issuer: 'Infosys Springboard' },
+      { title: 'Udemy Professional Certification', url: '/certificates/cert-08-opentelemetry-udemy.jpg', issuer: 'Udemy' },
+    ],
   },
   {
     id: 'cert-09',
@@ -964,6 +993,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '21.12.2025',
     year: 2025,
     skills: ['Cloud Concepts', 'Microsoft 365 Services', 'Security & Compliance'],
+    certificateUrl: '/certificates/cert-09-ms900-fundamentals-udemy.jpg',
   },
   {
     id: 'cert-10',
@@ -974,6 +1004,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '21.12.2025',
     year: 2025,
     skills: ['Apache JMeter', 'Load Testing', 'API Performance Benchmarking'],
+    certificateUrl: '/certificates/cert-10-performance-testing-udemy.jpg',
   },
   {
     id: 'cert-11',
@@ -984,6 +1015,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '21.12.2025',
     year: 2025,
     skills: ['Computer Science Foundations', 'Boolean Algebra', 'Data Structures'],
+    certificateUrl: '/certificates/cert-11-iipu-cs-infosys.jpg',
   },
 
   // Security & Database
@@ -996,6 +1028,11 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '20.12.2025',
     year: 2025,
     skills: ['Web Security', 'Injection Defense', 'Authentication Security'],
+    certificateUrl: '/certificates/cert-12-owasp-top10-infosys.jpg',
+    certificateImages: [
+      { title: 'Infosys Springboard Certification', url: '/certificates/cert-12-owasp-top10-infosys.jpg', issuer: 'Infosys Springboard' },
+      { title: 'Udemy Professional Certification', url: '/certificates/cert-12-owasp-top10-udemy.jpg', issuer: 'Udemy' },
+    ],
   },
   {
     id: 'cert-13',
@@ -1006,6 +1043,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '21.12.2025',
     year: 2025,
     skills: ['Oracle DB', 'Data Pump Export/Import', 'SQL Utilities'],
+    certificateUrl: '/certificates/cert-13-oracle-db-utilities-udemy.jpg',
   },
   {
     id: 'cert-14',
@@ -1016,6 +1054,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '20.12.2025',
     year: 2025,
     skills: ['Apache Tomcat Server', 'PHP Runtime Configuration', 'Web Deployment'],
+    certificateUrl: '/certificates/cert-14-tomcat-php-infosys.jpg',
   },
 
   // IoT & Hardware
@@ -1028,6 +1067,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '09.09.2024',
     year: 2024,
     skills: ['Gas/Smoke Sensing', 'Circuit Interfacing', 'Hardware Experimentation'],
+    certificateUrl: '/certificates/cert-15-smoke-detector-infosys.jpg',
   },
   {
     id: 'cert-16',
@@ -1038,6 +1078,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '28.11.2025',
     year: 2025,
     skills: ['Mobile UI Architecture', 'App Prototyping', 'Component Lifecycle'],
+    certificateUrl: '/certificates/cert-16-mobile-app-pantech.jpg',
   },
 
   // Professional & Management
@@ -1050,6 +1091,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '21.09.2024',
     year: 2024,
     skills: ['Career Strategy', 'Technical Resume Building', 'Interview Preparedness'],
+    certificateUrl: '/certificates/cert-17-job-application-ibm.jpg',
   },
   {
     id: 'cert-18',
@@ -1060,6 +1102,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '21.09.2024',
     year: 2024,
     skills: ['Agile Collaboration', 'Digital Ethics', 'Workplace Problem Solving'],
+    certificateUrl: '/certificates/cert-18-digital-world-ibm.jpg',
   },
   {
     id: 'cert-19',
@@ -1070,6 +1113,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '21.09.2024',
     year: 2024,
     skills: ['Professional Communication', 'Team Coordination', 'Industry Readiness'],
+    certificateUrl: '/certificates/cert-19-employability-skills-ibm.jpg',
   },
   {
     id: 'cert-20',
@@ -1080,6 +1124,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '08.08.2023',
     year: 2023,
     skills: ['User-Centric Design', 'Ideation Frameworks', 'Prototype Iteration'],
+    certificateUrl: '/certificates/cert-20-design-thinking-infosys.jpg',
   },
   {
     id: 'cert-21',
@@ -1090,6 +1135,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '18.01.2024',
     year: 2024,
     skills: ['SEO Foundations', 'Content Strategy', 'Analytics Overview'],
+    certificateUrl: '/certificates/cert-21-digital-marketing-infosys.jpg',
   },
   {
     id: 'cert-22',
@@ -1100,6 +1146,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '21.12.2025',
     year: 2025,
     skills: ['Technical Storytelling', 'Slide Design', 'Audience Engagement'],
+    certificateUrl: '/certificates/cert-22-presentation-skills-udemy.jpg',
   },
   {
     id: 'cert-23',
@@ -1110,6 +1157,7 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '21.12.2025',
     year: 2025,
     skills: ['Project Alignment', 'Stakeholder Communication', 'Team Scoping'],
+    certificateUrl: '/certificates/cert-23-project-kickoff-udemy.jpg',
   },
   {
     id: 'cert-24',
@@ -1120,16 +1168,23 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '21.12.2025',
     year: 2025,
     skills: ['Agenda Structuring', 'Time Management', 'Action Item Tracking'],
+    certificateUrl: '/certificates/cert-24-planning-meetings-udemy.jpg',
   },
   {
     id: 'cert-25',
-    title: 'Interactive Skills & Email Writing',
+    title: 'Interactive Skills & Professional Communication',
     issuer: 'Infosys Springboard',
     platform: 'Infosys Springboard',
     category: 'Professional & Management',
     date: '17.07.2023',
     year: 2023,
-    skills: ['Business Email Etiquette', 'Professional Interpersonal Skills'],
+    skills: ['Business Email Etiquette', 'Professional Interpersonal Skills', 'Business English'],
+    certificateUrl: '/certificates/cert-25-interactive-skills-infosys.jpg',
+    certificateImages: [
+      { title: 'Interactive Skills', url: '/certificates/cert-25-interactive-skills-infosys.jpg', issuer: 'Infosys Springboard' },
+      { title: 'Business English', url: '/certificates/cert-25-business-english-infosys.jpg', issuer: 'Infosys Springboard' },
+      { title: 'Email Writing Skills', url: '/certificates/cert-25-email-writing-infosys.jpg', issuer: 'Infosys Springboard' },
+    ],
   },
 ];
 
@@ -1151,6 +1206,7 @@ export const WORKSHOPS: WorkshopItem[] = [
     ],
     skills: ['Hardware Diagnostics', 'LAN Networking', 'Crimping & Cabling', 'BIOS/UEFI', 'System Recovery'],
     badge: '5-Day Bootcamp',
+    certificateUrl: '/certificates/ws-01-pc-troubleshooting-srptc.jpg',
   },
   {
     id: 'ws-2',
@@ -1168,6 +1224,7 @@ export const WORKSHOPS: WorkshopItem[] = [
     ],
     skills: ['Augmented Reality', 'Virtual Reality', 'Spatial Computing', 'HCI Interfaces'],
     badge: 'Emerging Tech',
+    certificateUrl: '/certificates/ws-02-ar-vr-srptc.jpg',
   },
   {
     id: 'ws-3',
@@ -1185,6 +1242,7 @@ export const WORKSHOPS: WorkshopItem[] = [
     ],
     skills: ['Rapid Computation', 'Algorithmic Thinking', 'Speed Arithmetic', 'Problem Solving'],
     badge: 'Skill Development',
+    certificateUrl: '/certificates/ws-03-vedic-mathematics-srec.jpg',
   },
 ];
 
@@ -1204,9 +1262,11 @@ export const INTERNSHIP: InternshipItem = {
     'Simulation-driven testing and verification of embedded intelligence workflows',
   ],
   skills: ['AI System Design', 'Simulation Toolkits', 'Hardware-Software Interfacing', 'Decision Systems', 'Embedded Intelligence'],
+  certificateUrl: '/certificates/internship-01-ai-systems-srec.jpg',
 };
 
 export const LEADERSHIP_ROLES: LeadershipRole[] = [
+
   {
     title: 'Team Lead & Main Developer',
     organization: 'Final Year Engineering Projects & Competitions',

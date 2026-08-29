@@ -1,0 +1,452 @@
+[
+  {
+    "id": "ach-06",
+    "title": "2nd Prize \u2014 PAPER PRESENTATION (POLYSYM\u201924)",
+    "issuer": "Nachimuthu Polytechnic College",
+    "category": "Prizes & Awards",
+    "date": "31.01.2024",
+    "image": "/certificates/prize-06-polysym24-paper.jpg",
+    "size": 208906
+  },
+  {
+    "id": "ach-03",
+    "title": "1st Prize \u2014 MATH QUIZ (Vedic Mathematics)",
+    "issuer": "Sri Ramakrishna Engineering College",
+    "category": "Prizes & Awards",
+    "date": "23.09.2023",
+    "image": "/certificates/prize-03-vedic-math-quiz.jpg",
+    "size": 177222
+  },
+  {
+    "id": "ach-04",
+    "title": "1st Prize \u2014 PAPER PRESENTATION (Ramanujan\u2019s Life & Work)",
+    "issuer": "Sri Ramakrishna Polytechnic College",
+    "category": "Prizes & Awards",
+    "date": "18.12.2023",
+    "image": "/certificates/prize-04-ramanujan-paper.jpg",
+    "size": 222881
+  },
+  {
+    "id": "ach-05",
+    "title": "1st Prize \u2014 QUIZ COMPETITION (Ramanujan\u2019s Life & Work)",
+    "issuer": "Sri Ramakrishna Polytechnic College",
+    "category": "Prizes & Awards",
+    "date": "20.12.2023",
+    "image": "/certificates/prize-05-ramanujan-quiz.jpg",
+    "size": 177031
+  },
+  {
+    "id": "ach-07",
+    "title": "3rd Prize \u2014 PAPER PRESENTATION (INFINITUM\u201924)",
+    "issuer": "CIT Sandwich Polytechnic College",
+    "category": "Prizes & Awards",
+    "date": "01.03.2024",
+    "image": "/certificates/prize-07-infinitum24-paper.jpg",
+    "size": 180668
+  },
+  {
+    "id": "ach-02",
+    "title": "1st Prize \u2014 CODE DEBUGGING",
+    "issuer": "Sri Ramakrishna Polytechnic College",
+    "category": "Prizes & Awards",
+    "date": "23.07.2024",
+    "image": "/certificates/prize-02-code-debugging-srptc.jpg",
+    "size": 175203
+  },
+  {
+    "id": "ach-01",
+    "title": "1st Prize \u2014 CODE BUSTERS (National Level)",
+    "issuer": "KGiSL Institute of Technology",
+    "category": "Prizes & Awards",
+    "date": "17.04.2025",
+    "image": "/certificates/prize-01-code-busters-kgisl.jpg",
+    "size": 170561
+  },
+  {
+    "id": "part-01",
+    "title": "CODEXTREME \u2014 Competitive Coding (NEXUS\u201923)",
+    "issuer": "KGiSL Institute of Technology",
+    "category": "Participations",
+    "date": "05.10.2023",
+    "image": "/certificates/part-01-codextreme-kgisl.jpg",
+    "size": 180192
+  },
+  {
+    "id": "part-02",
+    "title": "Paper Presentation Track (POLYSYM\u201924)",
+    "issuer": "Nachimuthu Polytechnic College",
+    "category": "Participations",
+    "date": "31.01.2024",
+    "image": "/certificates/part-02-polysym24-paper.jpg",
+    "size": 214697
+  },
+  {
+    "id": "part-03",
+    "title": "Technical Paper Presentation",
+    "issuer": "Sri Ramakrishna Engineering College",
+    "category": "Participations",
+    "date": "22.02.2024",
+    "image": "/certificates/part-03-srec-paper.jpg",
+    "size": 201289
+  },
+  {
+    "id": "part-04",
+    "title": "CLUMINATI Technical Challenge (INFINITUM\u201924)",
+    "issuer": "CIT Sandwich Polytechnic College",
+    "category": "Participations",
+    "date": "01.03.2024",
+    "image": "/certificates/part-04-cluminati-infinitum24.jpg",
+    "size": 183343
+  },
+  {
+    "id": "part-05",
+    "title": "TANSACS State Level Online Quiz",
+    "issuer": "Tamil Nadu State AIDS Control Society (RRC)",
+    "category": "Participations",
+    "date": "12.08.2024",
+    "image": "/certificates/part-05-tansacs-quiz.jpg",
+    "size": 149392
+  },
+  {
+    "id": "part-06",
+    "title": "Srinivasa Ramanujan Mathematical Competition 2024",
+    "issuer": "Indian Society for Technical Education (ISTE)",
+    "category": "Participations",
+    "date": "20.10.2024",
+    "image": "/certificates/part-06-iste-ramanujan-math.jpg",
+    "size": 183262
+  },
+  {
+    "id": "part-07",
+    "title": "Paper Presentation Track (PA TECHARENA 2K25)",
+    "issuer": "P.A. Polytechnic College",
+    "category": "Participations",
+    "date": "07.02.2025",
+    "image": "/certificates/part-07-pa-techarena25-paper.jpg",
+    "size": 194819
+  },
+  {
+    "id": "part-08",
+    "title": "Paper Presentation Track (POLYSYM\u20192025)",
+    "issuer": "Nachimuthu Polytechnic College",
+    "category": "Participations",
+    "date": "19.02.2025",
+    "image": "/certificates/part-08-polysym25-paper.jpg",
+    "size": 176275
+  },
+  {
+    "id": "part-09",
+    "title": "Project Presentation \u2014 MINI MINDS, MEGA IDEAS",
+    "issuer": "Sri Ramakrishna Polytechnic College",
+    "category": "Participations",
+    "date": "15.09.2025",
+    "image": "/certificates/part-09-srptc-mini-minds.jpg",
+    "size": 150693
+  },
+  {
+    "id": "part-10",
+    "title": "VBYLD 2026 Online Quiz",
+    "issuer": "MYBharat (Ministry of Youth Affairs and Sports of India)",
+    "category": "Participations",
+    "date": "14.10.2025",
+    "image": "/certificates/part-10-vbyld-quiz.jpg",
+    "size": 74698
+  },
+  {
+    "id": "cert-05",
+    "title": "Basics of Python",
+    "issuer": "Infosys Springboard",
+    "category": "Programming & Cloud",
+    "date": "12.07.2023",
+    "image": "/certificates/cert-05-python-basics-infosys.jpg",
+    "size": 102289
+  },
+  {
+    "id": "cert-25-1",
+    "title": "Interactive Skills",
+    "issuer": "Infosys Springboard",
+    "category": "Professional & Management",
+    "date": "17.07.2023",
+    "image": "/certificates/cert-25-interactive-skills-infosys.jpg",
+    "size": 106562
+  },
+  {
+    "id": "cert-25-2",
+    "title": "Business English",
+    "issuer": "Infosys Springboard",
+    "category": "Professional & Management",
+    "date": "24.07.2023",
+    "image": "/certificates/cert-25-business-english-infosys.jpg",
+    "size": 114660
+  },
+  {
+    "id": "cert-25-3",
+    "title": "Email Writing Skills",
+    "issuer": "Infosys Springboard",
+    "category": "Professional & Management",
+    "date": "24.07.2023",
+    "image": "/certificates/cert-25-email-writing-infosys.jpg",
+    "size": 115057
+  },
+  {
+    "id": "cert-20",
+    "title": "Design Thinking",
+    "issuer": "Infosys Springboard",
+    "category": "Professional & Management",
+    "date": "08.08.2023",
+    "image": "/certificates/cert-20-design-thinking-infosys.jpg",
+    "size": 115114
+  },
+  {
+    "id": "cert-04",
+    "title": "AI For India 2.0",
+    "issuer": "GUVI through Skill India Digital",
+    "category": "AI & GenAI",
+    "date": "17.08.2023",
+    "image": "/certificates/cert-04-ai-for-india-guvi.jpg",
+    "size": 93954
+  },
+  {
+    "id": "cert-21",
+    "title": "Introduction to Digital Marketing",
+    "issuer": "Infosys Springboard",
+    "category": "Professional & Management",
+    "date": "18.01.2024",
+    "image": "/certificates/cert-21-digital-marketing-infosys.jpg",
+    "size": 121228
+  },
+  {
+    "id": "cert-07",
+    "title": "Java Tools",
+    "issuer": "Infosys Springboard",
+    "category": "Programming & Cloud",
+    "date": "26.03.2024",
+    "image": "/certificates/cert-07-java-tools-infosys.jpg",
+    "size": 114897
+  },
+  {
+    "id": "cert-15",
+    "title": "Experiment - Smoke Detector [Centrado kit]",
+    "issuer": "Infosys Springboard",
+    "category": "IoT & Hardware",
+    "date": "09.09.2024",
+    "image": "/certificates/cert-15-smoke-detector-infosys.jpg",
+    "size": 119011
+  },
+  {
+    "id": "cert-17",
+    "title": "Job Application Essentials",
+    "issuer": "IBM SkillsBuild",
+    "category": "Professional & Management",
+    "date": "21.09.2024",
+    "image": "/certificates/cert-17-job-application-ibm.jpg",
+    "size": 68589
+  },
+  {
+    "id": "cert-18",
+    "title": "Working in a Digital World: Professional Skills",
+    "issuer": "IBM SkillsBuild",
+    "category": "Professional & Management",
+    "date": "21.09.2024",
+    "image": "/certificates/cert-18-digital-world-ibm.jpg",
+    "size": 69913
+  },
+  {
+    "id": "cert-19",
+    "title": "TNSDC - Employability Skills",
+    "issuer": "IBM SkillsBuild",
+    "category": "Professional & Management",
+    "date": "21.09.2024",
+    "image": "/certificates/cert-19-employability-skills-ibm.jpg",
+    "size": 32870
+  },
+  {
+    "id": "cert-16",
+    "title": "Mobile App Development",
+    "issuer": "PANTECH and Naan Mudhalvan",
+    "category": "IoT & Hardware",
+    "date": "28.11.2025",
+    "image": "/certificates/cert-16-mobile-app-pantech.jpg",
+    "size": 122013
+  },
+  {
+    "id": "cert-24",
+    "title": "Planning Efficient Meetings",
+    "issuer": "Udemy",
+    "category": "Professional & Management",
+    "date": "21.12.2025",
+    "image": "/certificates/cert-24-planning-meetings-udemy.jpg",
+    "size": 40097
+  },
+  {
+    "id": "cert-23",
+    "title": "Project Kickoff Meetings: How to Lead Them Effectively",
+    "issuer": "Udemy",
+    "category": "Professional & Management",
+    "date": "21.12.2025",
+    "image": "/certificates/cert-23-project-kickoff-udemy.jpg",
+    "size": 51083
+  },
+  {
+    "id": "cert-22",
+    "title": "Presentation Skills: The Complete Guide",
+    "issuer": "Udemy",
+    "category": "Professional & Management",
+    "date": "21.12.2025",
+    "image": "/certificates/cert-22-presentation-skills-udemy.jpg",
+    "size": 44847
+  },
+  {
+    "id": "cert-13",
+    "title": "Oracle Database Utilities \u2014 Perform Data Export / Import",
+    "issuer": "Udemy",
+    "category": "Security & Database",
+    "date": "21.12.2025",
+    "image": "/certificates/cert-13-oracle-db-utilities-udemy.jpg",
+    "size": 50850
+  },
+  {
+    "id": "cert-14",
+    "title": "Configuring Tomcat & PHP",
+    "issuer": "Infosys Springboard",
+    "category": "Security & Database",
+    "date": "20.12.2025",
+    "image": "/certificates/cert-14-tomcat-php-infosys.jpg",
+    "size": 91408
+  },
+  {
+    "id": "cert-12a",
+    "title": "OWASP Top 10: Protecting Against Threats & Vulnerabilities",
+    "issuer": "Infosys Springboard",
+    "category": "Security & Database",
+    "date": "20.12.2025",
+    "image": "/certificates/cert-12-owasp-top10-infosys.jpg",
+    "size": 93955
+  },
+  {
+    "id": "cert-09",
+    "title": "Microsoft 365 Certified: Fundamentals (MS-900)",
+    "issuer": "Udemy",
+    "category": "Programming & Cloud",
+    "date": "21.12.2025",
+    "image": "/certificates/cert-09-ms900-fundamentals-udemy.jpg",
+    "size": 54749
+  },
+  {
+    "id": "cert-08a",
+    "title": "Observability in Cloud Native Apps Using OpenTelemetry",
+    "issuer": "Infosys Springboard",
+    "category": "Programming & Cloud",
+    "date": "20.12.2025",
+    "image": "/certificates/cert-08-opentelemetry-infosys.jpg",
+    "size": 93567
+  },
+  {
+    "id": "cert-01",
+    "title": "GenAI for IT: Transforming IT with Generative AI",
+    "issuer": "Infosys Springboard",
+    "category": "AI & GenAI",
+    "date": "20.12.2025",
+    "image": "/certificates/cert-01-genai-for-it-infosys.jpg",
+    "size": 92853
+  },
+  {
+    "id": "cert-11",
+    "title": "II PU Computer Science",
+    "issuer": "Infosys Springboard",
+    "category": "Programming & Cloud",
+    "date": "21.12.2025",
+    "image": "/certificates/cert-11-iipu-cs-infosys.jpg",
+    "size": 91549
+  },
+  {
+    "id": "cert-03",
+    "title": "ChatGPT for Everyone",
+    "issuer": "GUVI",
+    "category": "AI & GenAI",
+    "date": "20.12.2025",
+    "image": "/certificates/cert-03-chatgpt-everyone-guvi.jpg",
+    "size": 77391
+  },
+  {
+    "id": "cert-02",
+    "title": "GenAI for Professionals: 10x Your Productivity",
+    "issuer": "Udemy",
+    "category": "AI & GenAI",
+    "date": "20.12.2025",
+    "image": "/certificates/cert-02-genai-professionals-udemy.jpg",
+    "size": 48576
+  },
+  {
+    "id": "cert-12b",
+    "title": "OWASP Top 10: Protecting Against Threats and Vulnerabilities",
+    "issuer": "Udemy",
+    "category": "Security & Database",
+    "date": "20.12.2025",
+    "image": "/certificates/cert-12-owasp-top10-udemy.jpg",
+    "size": 55915
+  },
+  {
+    "id": "cert-08b",
+    "title": "Observability in Cloud Native Apps Using OpenTelemetry",
+    "issuer": "Udemy",
+    "category": "Programming & Cloud",
+    "date": "20.12.2025",
+    "image": "/certificates/cert-08-opentelemetry-udemy.jpg",
+    "size": 57441
+  },
+  {
+    "id": "cert-06",
+    "title": "Python Basics Course",
+    "issuer": "Udemy",
+    "category": "Programming & Cloud",
+    "date": "21.12.2025",
+    "image": "/certificates/cert-06-python-basics-udemy.jpg",
+    "size": 40847
+  },
+  {
+    "id": "cert-10",
+    "title": "Performance Testing Course with JMeter & Blazemeter",
+    "issuer": "Udemy",
+    "category": "Programming & Cloud",
+    "date": "21.12.2025",
+    "image": "/certificates/cert-10-performance-testing-udemy.jpg",
+    "size": 57819
+  },
+  {
+    "id": "ws-2",
+    "title": "Awareness Session on Exploration of AR/VR",
+    "issuer": "Sri Ramakrishna Polytechnic College",
+    "category": "Workshops",
+    "date": "13.10.2023",
+    "image": "/certificates/ws-02-ar-vr-srptc.jpg",
+    "size": 129498
+  },
+  {
+    "id": "ws-1",
+    "title": "PC and Laptop Troubleshooting & Networking",
+    "issuer": "Sri Ramakrishna Polytechnic College",
+    "category": "Workshops",
+    "date": "20.05.2024 \u2013 24.05.2024",
+    "image": "/certificates/ws-01-pc-troubleshooting-srptc.jpg",
+    "size": 175051
+  },
+  {
+    "id": "ws-3",
+    "title": "23MACCEO1: Vedic Mathematics Skill Development",
+    "issuer": "Sri Ramakrishna Engineering College",
+    "category": "Workshops",
+    "date": "22.09.2023 \u2013 23.09.2023",
+    "image": "/certificates/ws-03-vedic-mathematics-srec.jpg",
+    "size": 107110
+  },
+  {
+    "id": "internship",
+    "title": "AI-Powered Integrated System Design: Intern",
+    "issuer": "Sri Ramakrishna Engineering College",
+    "category": "Internship",
+    "date": "20.01.2025 \u2013 25.01.2025",
+    "image": "/certificates/internship-01-ai-systems-srec.jpg",
+    "size": 224049
+  }
+]

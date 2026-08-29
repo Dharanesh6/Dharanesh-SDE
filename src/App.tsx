@@ -17,6 +17,8 @@ import { CurrentlyExploring } from './components/CurrentlyExploring';
 import { GitHubPresence } from './components/GitHubPresence';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import { CertificateModal } from './components/CertificateModal';
+import type { CertificateModalData } from './types/portfolio';
 
 export function App() {
   const [isDark, setIsDark] = useState<boolean>(() => {
@@ -30,6 +32,7 @@ export function App() {
   });
 
   const [activeSection, setActiveSection] = useState<string>('hero');
+  const [selectedCertificate, setSelectedCertificate] = useState<CertificateModalData | null>(null);
   const [studioExpId, setStudioExpId] = useState<string | null>(() => {
     if (typeof window !== 'undefined' && window.location.hash.startsWith('#ai-studio')) {
       const exp = window.location.hash.replace('#ai-studio-', '').replace('#ai-studio', '');
@@ -222,13 +225,19 @@ export function App() {
         />
 
         {/* 9. Verified Achievement Wall & Symposiums */}
-        <AchievementWall />
+        <AchievementWall
+          onViewCertificate={(cert) => setSelectedCertificate(cert)}
+        />
 
         {/* 10. Searchable & Categorized Certifications Library */}
-        <Certifications />
+        <Certifications
+          onViewCertificate={(cert) => setSelectedCertificate(cert)}
+        />
 
         {/* 11. Experience, Internship & Technical Leadership */}
-        <Experience />
+        <Experience
+          onViewCertificate={(cert) => setSelectedCertificate(cert)}
+        />
 
         {/* 12. Active Exploration & Open Source Repositories */}
         <CurrentlyExploring />
@@ -240,8 +249,15 @@ export function App() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Certificate High-Resolution Modal Viewer */}
+      <CertificateModal
+        certificate={selectedCertificate}
+        onClose={() => setSelectedCertificate(null)}
+      />
     </div>
   );
 }
 
 export default App;
+

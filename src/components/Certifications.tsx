@@ -5,10 +5,18 @@ import {
   Building,
   ChevronDown,
   ChevronUp,
+  FileCheck,
+  Eye,
+  Layers,
 } from 'lucide-react';
 import { CERTIFICATIONS } from '../data/portfolioData';
+import type { CertificateModalData, CertificationItem } from '../types/portfolio';
 
-export function Certifications() {
+interface CertificationsProps {
+  onViewCertificate?: (cert: CertificateModalData) => void;
+}
+
+export function Certifications({ onViewCertificate }: CertificationsProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [showAll, setShowAll] = useState<boolean>(false);
@@ -36,6 +44,20 @@ export function Certifications() {
 
   const displayedList = showAll ? filteredCerts : filteredCerts.slice(0, 6);
 
+  const handleOpenCertificate = (cert: CertificationItem) => {
+    if (!cert.certificateUrl || !onViewCertificate) return;
+    onViewCertificate({
+      title: cert.title,
+      issuer: cert.issuer,
+      category: cert.category,
+      date: cert.date,
+      imageUrl: cert.certificateUrl,
+      additionalImages: cert.certificateImages,
+      skills: cert.skills,
+      verified: true,
+    });
+  };
+
   return (
     <section id="certifications" className="py-14 px-4 sm:px-6 lg:px-8 relative bg-dark-bg/30 light:bg-slate-50/50">
       <div className="max-w-6xl mx-auto">
@@ -49,7 +71,7 @@ export function Certifications() {
             Verified Certification Library
           </h2>
           <p className="mt-1.5 text-slate-400 light:text-slate-600 text-xs sm:text-sm max-w-lg">
-            25+ verified technical credentials from Infosys, IBM, GUVI, and Udemy.
+            25+ verified technical credentials from Infosys, IBM, GUVI, and Udemy with direct certificate viewing.
           </p>
         </div>
 
@@ -84,44 +106,85 @@ export function Certifications() {
         </div>
 
         {/* Certifications Compact Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {displayedList.map((cert) => (
-            <div
-              key={cert.id}
-              className="p-3.5 rounded-xl bg-dark-surface/70 light:bg-white border border-white/5 light:border-slate-200 flex flex-col justify-between hover:border-emerald-500/30 transition-colors"
-            >
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-1.5">
-                  <span className="text-[9px] font-mono px-2 py-0.2 rounded bg-white/5 light:bg-slate-100 text-slate-400">
-                    {cert.category}
-                  </span>
-                  <span className="text-[10px] font-mono text-slate-500">
-                    {cert.date}
-                  </span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+          {displayedList.map((cert) => {
+            const hasCert = !!cert.certificateUrl;
+            const isMultiCert = !!(cert.certificateImages && cert.certificateImages.length > 1);
+
+            return (
+              <div
+                key={cert.id}
+                onClick={() => hasCert && handleOpenCertificate(cert)}
+                className={`p-4 rounded-xl bg-dark-surface/70 light:bg-white border border-white/5 light:border-slate-200 flex flex-col justify-between hover:border-emerald-500/40 transition-all group ${
+                  hasCert ? 'cursor-pointer' : ''
+                }`}
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-white/5 light:bg-slate-100 text-slate-400">
+                      {cert.category}
+                    </span>
+                    <span className="text-[10px] font-mono text-slate-500">
+                      {cert.date}
+                    </span>
+                  </div>
+
+                  <h4 className="font-display font-semibold text-xs sm:text-sm text-white light:text-slate-900 line-clamp-2 group-hover:text-emerald-400 transition-colors">
+                    {cert.title}
+                  </h4>
+
+                  <div className="mt-1.5 flex items-center gap-1.5 text-[11px] font-mono text-slate-400 light:text-slate-600">
+                    <Building className="w-3 h-3 text-brand-emerald shrink-0" />
+                    <span className="truncate">{cert.issuer}</span>
+                  </div>
                 </div>
 
-                <h4 className="font-display font-semibold text-xs sm:text-sm text-white light:text-slate-900 line-clamp-2">
-                  {cert.title}
-                </h4>
+                <div className="mt-3.5 pt-2.5 border-t border-white/5 light:border-slate-200">
+                  <div className="flex flex-wrap gap-1 mb-2.5">
+                    {cert.skills.slice(0, 2).map((s, idx) => (
+                      <span
+                        key={idx}
+                        className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-dark-bg light:bg-slate-100 text-slate-300 light:text-slate-700"
+                      >
+                        {s}
+                      </span>
+                    ))}
+                    {cert.skills.length > 2 && (
+                      <span className="text-[9px] font-mono px-1 py-0.5 text-slate-500">
+                        +{cert.skills.length - 2}
+                      </span>
+                    )}
+                  </div>
 
-                <div className="mt-1 flex items-center gap-1.5 text-[11px] font-mono text-slate-400 light:text-slate-600">
-                  <Building className="w-3 h-3 text-brand-emerald shrink-0" />
-                  <span className="truncate">{cert.issuer}</span>
+                  {/* Certificate Button Strip */}
+                  {hasCert && (
+                    <div className="flex items-center justify-between pt-1">
+                      <span className="text-[10px] font-mono text-emerald-400/90 flex items-center gap-1">
+                        {isMultiCert ? (
+                          <Layers className="w-3 h-3 text-brand-cyan" />
+                        ) : (
+                          <FileCheck className="w-3 h-3 text-emerald-400" />
+                        )}
+                        <span>{isMultiCert ? `${cert.certificateImages?.length} Certs` : 'Verified Cert'}</span>
+                      </span>
+
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleOpenCertificate(cert);
+                        }}
+                        className="inline-flex items-center gap-1 px-2 py-0.8 rounded text-[10px] font-mono font-medium bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 transition-colors cursor-pointer"
+                      >
+                        <Eye className="w-3 h-3" />
+                        <span>View Cert</span>
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
-
-              <div className="mt-3 pt-2 border-t border-white/5 light:border-slate-200 flex flex-wrap gap-1">
-                {cert.skills.slice(0, 2).map((s, idx) => (
-                  <span
-                    key={idx}
-                    className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-dark-bg light:bg-slate-100 text-slate-300 light:text-slate-700"
-                  >
-                    {s}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Show More Toggle Button */}
@@ -140,3 +203,6 @@ export function Certifications() {
     </section>
   );
 }
+
+export default Certifications;
+
